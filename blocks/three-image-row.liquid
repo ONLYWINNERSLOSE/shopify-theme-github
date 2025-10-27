@@ -40,6 +40,9 @@
     {% assign alt_text = block.settings[alt_setting] %}
     {% assign overlay_text = block.settings[text_setting] %}
     {% assign text_position = block.settings[text_position_setting] | default: 'center' %}
+    {% assign image = block.settings[image_setting] %}
+    {% assign link = block.settings[link_setting] %}
+    {% assign alt_text = block.settings[alt_setting] %}
 
     {% liquid
       if alt_text == blank and image != blank and image.alt != blank
@@ -79,6 +82,12 @@
           </a>
         {% else %}
           {{ media_content | strip }}
+        {% if link %}
+          <a href="{{ link }}" class="three-image-row__link">
+            {{ image_markup | strip }}
+          </a>
+        {% else %}
+          {{ image_markup | strip }}
         {% endif %}
       {% else %}
         <div class="three-image-row__placeholder">
