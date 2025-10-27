@@ -1,10 +1,10 @@
 {% liquid
-  assign widths = '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2100, 2400, 2700, 3000, 3300, 3600'
+  assign widths = '300, 450, 600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000'
   assign desktop_size = '(min-width: 750px) calc((100vw - 2px) / 3)'
   assign mobile_size = 'calc((100vw - 2px) / 3)'
   assign sizes = mobile_size | append: ', ' | append: desktop_size
 
-  assign aspect_ratio = null
+  assign aspect_ratio = nil
 
   case block.settings.image_ratio
     when 'square'
@@ -18,7 +18,7 @@
   endcase
 
   if block.settings.image_ratio == 'adapt'
-    assign aspect_ratio = null
+    assign aspect_ratio = nil
   endif
 
   assign overlay_text_color = block.settings.overlay_text_color
@@ -31,10 +31,7 @@
   endif
 %}
 
-{% capture wrapper_style %}
-  {% render 'spacing-style', settings: block.settings %}
-  {% render 'size-style', settings: block.settings %}
-  {% render 'border-override', settings: block.settings %}
+{% capture wrapper_styles %}
   {% if aspect_ratio %}
     --three-image-row-aspect: {{ aspect_ratio }};
   {% endif %}
@@ -46,23 +43,20 @@
     --three-image-row-text-background: rgba({{ overlay_background_rgb }}, {{ overlay_background_opacity }});
   {% endif %}
 {% endcapture %}
-{% assign wrapper_style = wrapper_style | replace: '\n', ' ' | strip %}
+{% assign wrapper_styles = wrapper_styles | replace: '\n', ' ' | strip %}
 
-<div
-  class="three-image-row spacing-style size-style border-style{{ has_ratio_class }}"
-  {% if wrapper_style != blank %}style="{{ wrapper_style }}"{% endif %}
-  {{ block.shopify_attributes }}
->
+<div class="three-image-row{{ has_ratio_class }}" {% if wrapper_styles != blank %}style="{{ wrapper_styles }}"{% endif %} {{ block.shopify_attributes }}>
   <div class="three-image-row__grid">
     {% for i in (1..3) %}
       {% assign image_setting = 'image_' | append: i %}
-      {% assign link_setting = 'link_' | append: i %}
       {% assign alt_setting = 'image_' | append: i | append: '_alt' %}
+      {% assign link_setting = 'link_' | append: i %}
       {% assign text_setting = 'text_' | append: i %}
       {% assign text_position_setting = 'text_position_' | append: i %}
+
       {% assign image = block.settings[image_setting] %}
-      {% assign link = block.settings[link_setting] %}
       {% assign alt_text = block.settings[alt_setting] %}
+      {% assign link = block.settings[link_setting] %}
       {% assign overlay_text = block.settings[text_setting] %}
       {% assign text_position = block.settings[text_position_setting] | default: 'center' %}
 
@@ -77,8 +71,8 @@
       %}
 
       <div class="three-image-row__item">
-        {% if image %}
-          {% capture image_markup %}
+        {% capture media_content %}
+          {% if image %}
             {{
               image
               | image_url: width: 3840
@@ -89,29 +83,23 @@
                 class: 'three-image-row__image',
                 alt: alt_text
             }}
-          {% endcapture %}
-
-          {% capture media_content %}
-            {{ image_markup | strip }}
-            {% if overlay_text != blank %}
-              <span class="three-image-row__text three-image-row__text--{{ text_position }}">{{ overlay_text | escape }}</span>
-            {% endif %}
-          {% endcapture %}
-
-          {% if link %}
-            <a href="{{ link }}" class="three-image-row__link">
-              {{ media_content | strip }}
-            </a>
           {% else %}
-            {{ media_content | strip }}
+            <div class="three-image-row__placeholder">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
           {% endif %}
-        {% else %}
-          <div class="three-image-row__placeholder">
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          </div>
+
           {% if overlay_text != blank %}
             <span class="three-image-row__text three-image-row__text--{{ text_position }}">{{ overlay_text | escape }}</span>
           {% endif %}
+        {% endcapture %}
+
+        {% if link != blank %}
+          <a href="{{ link }}" class="three-image-row__link">
+            {{ media_content | strip }}
+          </a>
+        {% else %}
+          {{ media_content | strip }}
         {% endif %}
       </div>
     {% endfor %}
@@ -141,14 +129,39 @@
     color: inherit;
   }
 
+  .three-image-row__image {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .three-image-row--has-ratio .three-image-row__image {
+    height: 100%;
+  }
+
+  .three-image-row__placeholder {
+    position: relative;
+    padding-top: 66.66%;
+    background: rgba(var(--color-foreground), 0.04);
+  }
+
+  .three-image-row--has-ratio .three-image-row__placeholder {
+    padding-top: 0;
+    height: 100%;
+  }
+
+  .three-image-row__placeholder .placeholder-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   .three-image-row__text {
     position: absolute;
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1rem;
     color: var(--three-image-row-text-color, rgb(var(--color-foreground)));
-    background: var(
-      --three-image-row-text-background,
-      rgba(var(--color-background), 0.7)
-    );
+    background: var(--three-image-row-text-background, rgba(var(--color-background), 0.7));
     border-radius: 0.4rem;
     pointer-events: none;
     text-align: center;
@@ -205,45 +218,12 @@
     bottom: 0.75rem;
     right: 0.75rem;
   }
-
-  .three-image-row__image {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .three-image-row--has-ratio .three-image-row__image {
-    height: 100%;
-  }
-
-  .three-image-row__placeholder {
-    position: relative;
-    padding-top: 66.66%;
-    background: rgba(var(--color-foreground), 0.04);
-  }
-
-  .three-image-row--has-ratio .three-image-row__placeholder {
-    padding-top: 0;
-    height: 100%;
-  }
-
-  .three-image-row__placeholder .placeholder-svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Three image row",
-  "tag": null,
   "settings": [
-    {
-      "type": "header",
-      "content": "Layout"
-    },
     {
       "type": "select",
       "id": "image_ratio",
@@ -273,103 +253,6 @@
       ]
     },
     {
-      "type": "select",
-      "id": "width",
-      "label": "Width",
-      "options": [
-        {
-          "value": "fit-content",
-          "label": "Fit content"
-        },
-        {
-          "value": "fill",
-          "label": "Fill"
-        },
-        {
-          "value": "custom",
-          "label": "Custom"
-        }
-      ],
-      "default": "fill"
-    },
-    {
-      "type": "range",
-      "id": "custom_width",
-      "label": "Custom width",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.width == 'custom' }}"
-    },
-    {
-      "type": "select",
-      "id": "width_mobile",
-      "label": "Width (mobile)",
-      "options": [
-        {
-          "value": "fit-content",
-          "label": "Fit content"
-        },
-        {
-          "value": "fill",
-          "label": "Fill"
-        },
-        {
-          "value": "custom",
-          "label": "Custom"
-        }
-      ],
-      "default": "fill"
-    },
-    {
-      "type": "range",
-      "id": "custom_width_mobile",
-      "label": "Custom width (mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
-    },
-    {
-      "type": "select",
-      "id": "height",
-      "label": "Height",
-      "options": [
-        {
-          "value": "auto",
-          "label": "Auto"
-        },
-        {
-          "value": "fill",
-          "label": "Fill"
-        },
-        {
-          "value": "custom",
-          "label": "Custom"
-        }
-      ],
-      "default": "auto"
-    },
-    {
-      "type": "range",
-      "id": "custom_height",
-      "label": "Custom height",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.height == 'custom' }}"
-    },
-    {
-      "type": "header",
-      "content": "Appearance"
-    },
-    {
       "type": "color",
       "id": "overlay_text_color",
       "label": "Overlay text color"
@@ -388,98 +271,6 @@
       "step": 5,
       "unit": "%",
       "default": 70
-    },
-    {
-      "type": "select",
-      "id": "border",
-      "label": "Border style",
-      "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "solid",
-          "label": "Solid"
-        }
-      ],
-      "default": "none"
-    },
-    {
-      "type": "range",
-      "id": "border_width",
-      "label": "Border width",
-      "min": 0,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 0,
-      "visible_if": "{{ block.settings.border != 'none' }}"
-    },
-    {
-      "type": "range",
-      "id": "border_opacity",
-      "label": "Border opacity",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.border != 'none' }}"
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Padding"
-    },
-    {
-      "type": "range",
-      "id": "padding-block-start",
-      "label": "Top padding",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-block-end",
-      "label": "Bottom padding",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-start",
-      "label": "Left padding",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-end",
-      "label": "Right padding",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
     },
     {
       "type": "header",
