@@ -33,6 +33,13 @@
     {% assign image_setting = 'image_' | append: i %}
     {% assign link_setting = 'link_' | append: i %}
     {% assign alt_setting = 'image_' | append: i | append: '_alt' %}
+    {% assign text_setting = 'text_' | append: i %}
+    {% assign text_position_setting = 'text_position_' | append: i %}
+    {% assign image = block.settings[image_setting] %}
+    {% assign link = block.settings[link_setting] %}
+    {% assign alt_text = block.settings[alt_setting] %}
+    {% assign overlay_text = block.settings[text_setting] %}
+    {% assign text_position = block.settings[text_position_setting] | default: 'center' %}
     {% assign image = block.settings[image_setting] %}
     {% assign link = block.settings[link_setting] %}
     {% assign alt_text = block.settings[alt_setting] %}
@@ -62,6 +69,19 @@
           }}
         {% endcapture %}
 
+        {% capture media_content %}
+          {{ image_markup | strip }}
+          {% if overlay_text != blank %}
+            <span class="three-image-row__text three-image-row__text--{{ text_position }}">{{ overlay_text | escape }}</span>
+          {% endif %}
+        {% endcapture %}
+
+        {% if link %}
+          <a href="{{ link }}" class="three-image-row__link">
+            {{ media_content | strip }}
+          </a>
+        {% else %}
+          {{ media_content | strip }}
         {% if link %}
           <a href="{{ link }}" class="three-image-row__link">
             {{ image_markup | strip }}
@@ -73,6 +93,9 @@
         <div class="three-image-row__placeholder">
           {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
         </div>
+        {% if overlay_text != blank %}
+          <span class="three-image-row__text three-image-row__text--{{ text_position }}">{{ overlay_text | escape }}</span>
+        {% endif %}
       {% endif %}
     </div>
   {% endfor %}
@@ -99,6 +122,68 @@
   .three-image-row__link:visited {
     display: block;
     color: inherit;
+  }
+
+  .three-image-row__text {
+    position: absolute;
+    padding: 1rem 1.25rem;
+    color: rgb(var(--color-foreground));
+    background: rgba(var(--color-background), 0.7);
+    border-radius: 0.4rem;
+    pointer-events: none;
+    text-align: center;
+    max-width: calc(100% - 2rem);
+    word-break: break-word;
+  }
+
+  .three-image-row__text--top-left {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .three-image-row__text--top-center {
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .three-image-row__text--top-right {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .three-image-row__text--middle-left {
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+  }
+
+  .three-image-row__text--center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .three-image-row__text--middle-right {
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+  }
+
+  .three-image-row__text--bottom-left {
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .three-image-row__text--bottom-center {
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .three-image-row__text--bottom-right {
+    bottom: 0.75rem;
+    right: 0.75rem;
   }
 
   .three-image-row__image {
@@ -183,6 +268,55 @@
       "info": "Alternative text for accessibility."
     },
     {
+      "type": "text",
+      "id": "text_1",
+      "label": "Overlay text"
+    },
+    {
+      "type": "select",
+      "id": "text_position_1",
+      "label": "Text position",
+      "default": "center",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle-left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "middle-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
       "type": "url",
       "id": "link_1",
       "label": "Link"
@@ -203,6 +337,55 @@
       "info": "Alternative text for accessibility."
     },
     {
+      "type": "text",
+      "id": "text_2",
+      "label": "Overlay text"
+    },
+    {
+      "type": "select",
+      "id": "text_position_2",
+      "label": "Text position",
+      "default": "center",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle-left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "middle-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
       "type": "url",
       "id": "link_2",
       "label": "Link"
@@ -221,6 +404,55 @@
       "id": "image_3_alt",
       "label": "Alt text",
       "info": "Alternative text for accessibility."
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Overlay text"
+    },
+    {
+      "type": "select",
+      "id": "text_position_3",
+      "label": "Text position",
+      "default": "center",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle-left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "middle-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ]
     },
     {
       "type": "url",
