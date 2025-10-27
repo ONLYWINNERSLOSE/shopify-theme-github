@@ -35,14 +35,12 @@
     {% assign alt_setting = 'image_' | append: i | append: '_alt' %}
     {% assign text_setting = 'text_' | append: i %}
     {% assign text_position_setting = 'text_position_' | append: i %}
+
     {% assign image = block.settings[image_setting] %}
     {% assign link = block.settings[link_setting] %}
     {% assign alt_text = block.settings[alt_setting] %}
     {% assign overlay_text = block.settings[text_setting] %}
     {% assign text_position = block.settings[text_position_setting] | default: 'center' %}
-    {% assign image = block.settings[image_setting] %}
-    {% assign link = block.settings[link_setting] %}
-    {% assign alt_text = block.settings[alt_setting] %}
 
     {% liquid
       if alt_text == blank and image != blank and image.alt != blank
@@ -56,7 +54,7 @@
 
     <div class="three-image-row__item">
       {% if image %}
-        {% capture image_markup %}
+        {% capture media_content %}
           {{
             image
             | image_url: width: 3840
@@ -67,10 +65,6 @@
               class: 'three-image-row__image',
               alt: alt_text
           }}
-        {% endcapture %}
-
-        {% capture media_content %}
-          {{ image_markup | strip }}
           {% if overlay_text != blank %}
             <span class="three-image-row__text three-image-row__text--{{ text_position }}">{{ overlay_text | escape }}</span>
           {% endif %}
@@ -82,12 +76,6 @@
           </a>
         {% else %}
           {{ media_content | strip }}
-        {% if link %}
-          <a href="{{ link }}" class="three-image-row__link">
-            {{ image_markup | strip }}
-          </a>
-        {% else %}
-          {{ image_markup | strip }}
         {% endif %}
       {% else %}
         <div class="three-image-row__placeholder">
