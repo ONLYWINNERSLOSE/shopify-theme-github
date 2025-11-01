@@ -370,7 +370,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><em>Ce qu'il faut retenir</em></p>",
+                    "text": "<p><em>Description</em></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
