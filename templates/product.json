@@ -203,9 +203,53 @@
                 "group_8B3NLh"
               ]
             },
-            "mageplaza_size_chart_mp_inline_button_pmMUHe": {
-              "type": "shopify://apps/mageplaza-size-chart/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
-              "settings": {}
+            "group_kNeUtN": {
+              "type": "group",
+              "name": "Guide des tailles",
+              "settings": {
+                "link": "",
+                "open_in_new_tab": false,
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-end",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "mageplaza_size_chart_mp_inline_button_XeB87Q": {
+                  "type": "shopify://apps/mageplaza-size-chart/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
+                  "settings": {}
+                }
+              },
+              "block_order": [
+                "mageplaza_size_chart_mp_inline_button_XeB87Q"
+              ]
             },
             "variant_picker": {
               "type": "variant-picker",
@@ -482,7 +526,7 @@
           },
           "block_order": [
             "group",
-            "mageplaza_size_chart_mp_inline_button_pmMUHe",
+            "group_kNeUtN",
             "variant_picker",
             "product_inventory_k8fDgV",
             "buy_buttons",
