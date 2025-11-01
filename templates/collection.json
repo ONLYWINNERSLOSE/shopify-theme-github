@@ -115,7 +115,7 @@
           "settings": {
             "text": "{{ closest.collection.description }}",
             "width": "100%",
-            "max_width": "none",
+            "max_width": "narrow",
             "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
