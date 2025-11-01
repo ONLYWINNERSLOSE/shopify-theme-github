@@ -370,7 +370,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><em>Description</em></p>",
+                    "text": "<p>Description</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -456,7 +456,7 @@
                     "text_wggaQJ": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>{{ closest.product.metafields.custom.details | metafield_tag }}</p>",
+                        "text": "<p><em>{{ closest.product.metafields.custom.details | metafield_tag }}</em></p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -495,7 +495,7 @@
                     "text_dJRy9z": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>{{ metaobjects.politique_de_retour[\"politique-de-retour-cbiw9ivf\"].return_policy | metafield_tag }}</p>",
+                        "text": "<p><em>{{ metaobjects.politique_de_retour[\"politique-de-retour-cbiw9ivf\"].return_policy | metafield_tag }}</em></p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -534,7 +534,7 @@
                     "text_id3E33": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>{{ closest.product.metafields.custom.entretien | metafield_tag }}</p>",
+                        "text": "<p><em>{{ closest.product.metafields.custom.entretien | metafield_tag }}</em></p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
