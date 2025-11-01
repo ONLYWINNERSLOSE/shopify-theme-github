@@ -324,7 +324,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "LIVRAISON ET RETOUR",
-                    "open_by_default": true,
+                    "open_by_default": false,
                     "icon": "none",
                     "width": 20
                   },
