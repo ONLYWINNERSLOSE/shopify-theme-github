@@ -665,7 +665,7 @@
       ],
       "settings": {
         "product": "{{ closest.product }}",
-        "recommendation_type": "complementary",
+        "recommendation_type": "related",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
