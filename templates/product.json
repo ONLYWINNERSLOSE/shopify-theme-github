@@ -203,6 +203,10 @@
                 "group_8B3NLh"
               ]
             },
+            "mageplaza_size_chart_mp_inline_button_pmMUHe": {
+              "type": "shopify://apps/mageplaza-size-chart/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
+              "settings": {}
+            },
             "variant_picker": {
               "type": "variant-picker",
               "settings": {
@@ -478,6 +482,7 @@
           },
           "block_order": [
             "group",
+            "mageplaza_size_chart_mp_inline_button_pmMUHe",
             "variant_picker",
             "product_inventory_k8fDgV",
             "buy_buttons",
