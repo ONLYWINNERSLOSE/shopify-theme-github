@@ -675,7 +675,7 @@
         "rows_gap": 12,
         "icons_style": "none",
         "icons_shape": "none",
-        "section_width": "full-width",
+        "section_width": "page-width",
         "gap": 14,
         "color_scheme": "scheme-1",
         "padding-block-start": 15,
