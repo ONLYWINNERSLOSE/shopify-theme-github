@@ -63,8 +63,8 @@
             "border_radius": 0,
             "padding-block-start": 48,
             "padding-block-end": 48,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-start": 5,
+            "padding-inline-end": 5
           },
           "blocks": {
             "group": {
@@ -295,13 +295,13 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "",
-                "background": false,
-                "background_color": "#00000026",
+                "background": true,
+                "background_color": "#686a6d",
                 "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-start": 2,
+                "padding-block-end": 2,
+                "padding-inline-start": 5,
+                "padding-inline-end": 5
               },
               "blocks": {}
             },
@@ -314,14 +314,14 @@
                 "type_preset": "h6",
                 "inherit_color_scheme": true,
                 "color_scheme": "",
-                "border": "none",
+                "border": "solid",
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-start": 2,
+                "padding-block-end": 2,
+                "padding-inline-start": 5,
+                "padding-inline-end": 5
               },
               "blocks": {
                 "accordion_row_cQeVjg": {
