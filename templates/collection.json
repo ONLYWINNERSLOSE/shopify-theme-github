@@ -218,6 +218,18 @@
                 "text_zh463G"
               ]
             },
+            "divider_NCnRaH": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
             "group_F6KbVk": {
               "type": "group",
               "name": "t:names.group",
@@ -319,6 +331,7 @@
           "block_order": [
             "group_rpLUqc",
             "group_9h6Unn",
+            "divider_NCnRaH",
             "group_F6KbVk"
           ]
         }
