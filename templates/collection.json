@@ -221,7 +221,6 @@
             "divider_NCnRaH": {
               "type": "_divider",
               "name": "t:names.divider",
-              "disabled": true,
               "settings": {
                 "thickness": 1,
                 "corner_radius": "square",
