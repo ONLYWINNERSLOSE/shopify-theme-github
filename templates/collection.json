@@ -273,7 +273,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Nombre de pièce : {{ closest.collection.metafields.custom.nombre_de_piece.value }}</p>",
+                    "text": "<p>Nombre de pièces : {{ closest.collection.metafields.custom.nombre_de_piece.value }}</p>",
                     "width": "100%",
                     "max_width": "narrow",
                     "alignment": "left",
