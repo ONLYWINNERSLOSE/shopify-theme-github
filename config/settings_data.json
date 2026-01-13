@@ -383,13 +383,13 @@
       },
       "scheme-7": {
         "settings": {
-          "background": "rgba(0,0,0,0)",
-          "foreground_heading": "#000000",
-          "foreground": "#000000",
+          "background": "#ae7524",
+          "foreground_heading": "#77512c",
+          "foreground": "#77512c",
           "primary": "#000000",
           "primary_hover": "#000000",
           "border": "rgba(0,0,0,0)",
-          "shadow": "#000000",
+          "shadow": "#ae7524",
           "primary_button_background": "#000000",
           "primary_button_text": "#ffffff",
           "primary_button_border": "#000000",
