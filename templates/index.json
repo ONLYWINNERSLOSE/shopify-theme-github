@@ -546,7 +546,7 @@
       "settings": {
         "collection": "nouveautes",
         "layout_type": "grid",
-        "carousel_on_mobile": true,
+        "carousel_on_mobile": false,
         "max_products": 16,
         "columns": 3,
         "mobile_columns": "2",
@@ -924,7 +924,7 @@
       "settings": {
         "collection": "tous-les-produits",
         "layout_type": "grid",
-        "carousel_on_mobile": true,
+        "carousel_on_mobile": false,
         "max_products": 16,
         "columns": 3,
         "mobile_columns": "2",
