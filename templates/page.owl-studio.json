@@ -110,8 +110,8 @@
                     "image_ratio": "adapt",
                     "width": "fill",
                     "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 30,
                     "height": "fit",
                     "border": "none",
                     "border_width": 1,
@@ -250,12 +250,38 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "text_pPLHWz": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Collections</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h4",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground-heading)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 5,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "menu_BhFdmc": {
                   "type": "menu",
                   "name": "t:names.menu",
                   "settings": {
                     "menu": "studio",
-                    "heading": "Collections",
+                    "heading": "",
                     "menu_spacing": 0,
                     "show_as_accordion": false,
                     "accordion_icon": "caret",
@@ -273,6 +299,7 @@
                 }
               },
               "block_order": [
+                "text_pPLHWz",
                 "menu_BhFdmc"
               ]
             }
