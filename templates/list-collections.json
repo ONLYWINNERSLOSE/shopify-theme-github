@@ -105,6 +105,7 @@
           "name": "Three image row",
           "settings": {
             "image_ratio": "square",
+            "full_width": true,
             "image_1": "shopify://shop_images/Fichier_19-100.jpg",
             "image_1_alt": "",
             "text_1": "",
