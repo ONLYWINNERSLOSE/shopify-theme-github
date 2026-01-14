@@ -37,9 +37,22 @@
   if is_full_width
     assign container_class = container_class | append: ' three-image-row--full-width'
   endif
+
+  if block.settings.height == 'custom'
+    assign container_class = container_class | append: ' three-image-row--fixed-height'
+  endif
+
+  capture container_style
+    if aspect_ratio
+      echo '--three-image-row-aspect: ' | append: aspect_ratio | append: ';'
+    endif
+    if block.settings.height == 'custom'
+      echo '--three-image-row-height: ' | append: block.settings.custom_height | append: 'px;'
+    endif
+  endcapture
 %}
 
-<div class="{{ container_class }}"{% if aspect_ratio %} style="--three-image-row-aspect: {{ aspect_ratio }};"{% endif %} {{ block.shopify_attributes }}>
+<div class="{{ container_class }}"{% if container_style != blank %} style="{{ container_style | strip }}"{% endif %} {{ block.shopify_attributes }}>
   {% for i in (1..3) %}
     {% assign image_setting = 'image_' | append: i %}
     {% assign link_setting = 'link_' | append: i %}
@@ -119,6 +132,10 @@
     background: rgb(var(--color-background));
   }
 
+  .three-image-row--fixed-height .three-image-row__item {
+    height: var(--three-image-row-height);
+  }
+
   .three-image-row--has-ratio .three-image-row__item {
     aspect-ratio: var(--three-image-row-aspect);
   }
@@ -195,9 +212,14 @@
     width: 100%;
     display: block;
     object-fit: cover;
+    object-position: center;
   }
 
   .three-image-row--has-ratio .three-image-row__image {
+    height: 100%;
+  }
+
+  .three-image-row--fixed-height .three-image-row__image {
     height: 100%;
   }
 
@@ -208,6 +230,11 @@
   }
 
   .three-image-row--has-ratio .three-image-row__placeholder {
+    padding-top: 0;
+    height: 100%;
+  }
+
+  .three-image-row--fixed-height .three-image-row__placeholder {
     padding-top: 0;
     height: 100%;
   }
@@ -262,6 +289,33 @@
       "id": "full_width",
       "label": "Full width",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "custom_height",
+      "label": "Custom height",
+      "min": 200,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "default": 400,
+      "visible_if": "{{ block.settings.height == 'custom' }}"
     },
     {
       "type": "header",
