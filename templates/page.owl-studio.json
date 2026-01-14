@@ -474,7 +474,7 @@
       },
       "name": "t:names.products_grid",
       "settings": {
-        "collection": "owl-creative",
+        "collection": "owl-studio",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 8,
