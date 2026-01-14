@@ -349,7 +349,7 @@
           "foreground": "#000000",
           "primary": "#686a6d",
           "primary_hover": "#acacac",
-          "border": "#ffffff",
+          "border": "#000000",
           "shadow": "#ffffff",
           "primary_button_background": "#ffffff",
           "primary_button_text": "#000000",
