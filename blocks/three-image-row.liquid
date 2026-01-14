@@ -1,7 +1,14 @@
 {% liquid
   assign widths = '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2100, 2400, 2700, 3000, 3300, 3600'
-  assign desktop_size = '(min-width: 750px) calc((100vw - 2px) / 3)'
-  assign mobile_size = 'calc((100vw - 2px) / 3)'
+  assign is_full_width = block.settings.full_width
+
+  if is_full_width
+    assign desktop_size = '(min-width: 750px) calc((100vw - 2px) / 3)'
+    assign mobile_size = 'calc((100vw - 2px) / 3)'
+  else
+    assign desktop_size = '(min-width: 750px) calc((min(100vw, var(--page-width)) - 2px) / 3)'
+    assign mobile_size = 'calc((min(100vw, var(--page-width)) - 2px) / 3)'
+  endif
   assign sizes = mobile_size | append: ', ' | append: desktop_size
 
   assign aspect_ratio = null
@@ -25,6 +32,10 @@
     assign container_class = 'three-image-row three-image-row--has-ratio'
   else
     assign container_class = 'three-image-row'
+  endif
+
+  if is_full_width
+    assign container_class = container_class | append: ' three-image-row--full-width'
   endif
 %}
 
@@ -94,6 +105,12 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1px;
+  }
+
+  .three-image-row--full-width {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 
   .three-image-row__item {
@@ -239,6 +256,12 @@
           "label": "Widescreen"
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
     },
     {
       "type": "header",
