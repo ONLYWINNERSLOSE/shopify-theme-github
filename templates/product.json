@@ -135,18 +135,19 @@
                   },
                   "blocks": {}
                 },
-                "collection_title_VmRfMP": {
-                  "type": "collection-title",
-                  "name": "t:names.collection_title",
+                "text_Bjaf4L": {
+                  "type": "text",
+                  "name": "t:names.heading",
                   "settings": {
+                    "text": "",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
+                    "type_preset": "custom",
+                    "font": "var(--font-subheading--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "tight",
+                    "letter_spacing": "tight",
                     "case": "none",
                     "wrap": "pretty",
                     "color": "var(--color-foreground)",
@@ -229,7 +230,7 @@
               },
               "block_order": [
                 "text_xrnftG",
-                "collection_title_VmRfMP",
+                "text_Bjaf4L",
                 "group_8B3NLh"
               ]
             },
