@@ -13,7 +13,7 @@
   --size-style-width: {{ settings.width }};
 {%- endif -%}
 
-{%- if settings.height == 12px -%}
+{%- if settings.height == 'custom' -%}
   --size-style-height:
   {{- settings.custom_height }}%;
 {%- elsif settings.height == 'fill' -%}
