@@ -502,7 +502,7 @@
       "disabled": true,
       "name": "Collection",
       "settings": {
-        "collection": "tous-les-produits",
+        "collection": "all",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 16,
@@ -697,7 +697,7 @@
       },
       "name": "t:names.products_grid",
       "settings": {
-        "collection": "tous-les-produits",
+        "collection": "all",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 8,
