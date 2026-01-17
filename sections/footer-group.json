@@ -116,64 +116,29 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "footer_utilities_qjg4Ap": {
-              "type": "footer-utilities",
-              "name": "t:names.footer_utilities",
+            "email_signup_qLfkj4": {
+              "type": "email-signup",
+              "name": "t:names.email_signup",
               "settings": {
-                "divider_thickness": 0,
+                "width": "fill",
+                "custom_width": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border_style": "none",
+                "border_width": 1,
+                "border_radius": 0,
+                "input_type_preset": "paragraph",
+                "style_class": "button",
+                "display_type": "text",
+                "label": "S’inscrire",
+                "integrated_button": false,
+                "button_type_preset": "paragraph",
                 "padding-block-start": 0,
-                "padding-block-end": 20
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
-              "blocks": {
-                "copyright": {
-                  "type": "_footer-copyright",
-                  "disabled": true,
-                  "static": true,
-                  "settings": {
-                    "font_size": "0.75rem",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                },
-                "policy_list": {
-                  "type": "_footer-policy-list",
-                  "disabled": true,
-                  "static": true,
-                  "settings": {
-                    "font_size": "0.75rem",
-                    "case": "none"
-                  },
-                  "blocks": {}
-                },
-                "social_icons": {
-                  "type": "_footer-social-icons",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {
-                    "social_link_pWdEJY": {
-                      "type": "_social-link",
-                      "name": "t:names.social_link",
-                      "settings": {
-                        "link": "https://www.instagram.com/onlywinnerslose/"
-                      },
-                      "blocks": {}
-                    },
-                    "social_link_gwdAQi": {
-                      "type": "_social-link",
-                      "name": "t:names.social_link",
-                      "settings": {
-                        "link": "https://www.tiktok.com/@onlywinnerslose"
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "social_link_pWdEJY",
-                    "social_link_gwdAQi"
-                  ]
-                }
-              },
-              "block_order": []
+              "blocks": {}
             },
             "text_CexJey": {
               "type": "text",
@@ -196,14 +161,14 @@
                 "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
+                "padding-inline-start": 59,
                 "padding-inline-end": 0
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "footer_utilities_qjg4Ap",
+            "email_signup_qLfkj4",
             "text_CexJey"
           ]
         }
