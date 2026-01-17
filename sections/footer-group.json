@@ -212,7 +212,7 @@
               "settings": {
                 "text": "<p>FAILURES DEFINE SUCESS.</p>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "right",
                 "type_preset": "h4",
                 "font": "var(--font-body--family)",
