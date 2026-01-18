@@ -1,3 +1,42 @@
+{% assign metaobject = block.settings.metaobject %}
+{% assign title_field = block.settings.title_field | default: 'title' %}
+{% assign text_field = block.settings.text_field | default: 'content' %}
+{% assign image_field = block.settings.image_field | default: 'image' %}
+{% assign link_field = block.settings.link_field | default: 'link' %}
+{% assign title_text = '' %}
+{% assign body_text = '' %}
+{% assign body_text_metafield = blank %}
+{% assign image_value = blank %}
+{% assign link_url = '' %}
+
+{% if metaobject != blank %}
+  {% assign title_metafield = metaobject[title_field] %}
+  {% if title_metafield != blank %}
+    {% assign title_text = title_metafield.value | default: title_metafield | strip_html %}
+  {% endif %}
+
+  {% assign body_text_metafield = metaobject[text_field] %}
+
+  {% assign image_metafield = metaobject[image_field] %}
+  {% if image_metafield != blank %}
+    {% assign image_value = image_metafield.value | default: image_metafield %}
+  {% endif %}
+
+  {% assign link_metafield = metaobject[link_field] %}
+  {% if link_metafield != blank %}
+    {% assign link_value = link_metafield.value %}
+    {% if link_value.url %}
+      {% assign link_url = link_value.url %}
+    {% else %}
+      {% assign link_url = link_value %}
+    {% endif %}
+  {% endif %}
+{% elsif block.settings.fallback_text != blank %}
+  {% assign body_text = block.settings.fallback_text %}
+{% endif %}
+
+{% assign show_link = link_url != blank and block.settings.link_label != blank %}
+{% assign has_content = title_text != blank or body_text != blank or body_text_metafield != blank or show_link %}
 {% liquid
   assign metaobject = block.settings.metaobject
   assign title_field = block.settings.title_field | default: 'title'
