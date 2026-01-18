@@ -6,6 +6,7 @@
   assign link_field = block.settings.link_field | default: 'link'
   assign title_text = ''
   assign body_text = ''
+  assign body_text_metafield = blank
   assign image_value = blank
   assign link_url = ''
 
@@ -15,6 +16,7 @@
       assign title_text = title_metafield.value | default: title_metafield | strip_html
     endif
 
+    assign body_text_metafield = metaobject[text_field]
     assign text_metafield = metaobject[text_field]
     if text_metafield != blank
       assign body_text = text_metafield | metafield_tag
@@ -39,6 +41,10 @@
     endif
   elsif block.settings.fallback_text != blank
     assign body_text = block.settings.fallback_text
+  endif
+
+  assign show_link = link_url != blank and block.settings.link_label != blank
+  assign has_content = title_text != blank or body_text != blank or body_text_metafield != blank or show_link
     capture body_text
       {{ block.settings.fallback_text }}
     endcapture
@@ -68,6 +74,9 @@
           <h3 class="metaobject-card__title">{{ title_text }}</h3>
         {% endif %}
 
+        {% if body_text_metafield != blank %}
+          <div class="metaobject-card__text rte">{{ body_text_metafield | metafield_tag }}</div>
+        {% elsif body_text != blank %}
         {% if body_text != blank %}
           <div class="metaobject-card__text rte">{{ body_text }}</div>
         {% endif %}
