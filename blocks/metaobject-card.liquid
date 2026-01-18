@@ -18,6 +18,9 @@
     assign text_metafield = metaobject[text_field]
     if text_metafield != blank
       assign body_text = text_metafield | metafield_tag
+      capture body_text
+        {{ text_metafield | metafield_tag }}
+      endcapture
     endif
 
     assign image_metafield = metaobject[image_field]
@@ -36,6 +39,9 @@
     endif
   elsif block.settings.fallback_text != blank
     assign body_text = block.settings.fallback_text
+    capture body_text
+      {{ block.settings.fallback_text }}
+    endcapture
   endif
 
   assign show_link = link_url != blank and block.settings.link_label != blank
