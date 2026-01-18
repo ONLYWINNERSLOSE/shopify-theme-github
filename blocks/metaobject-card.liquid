@@ -1,0 +1,160 @@
+{% liquid
+  assign metaobject = block.settings.metaobject
+  assign title_field = block.settings.title_field | default: 'title'
+  assign text_field = block.settings.text_field | default: 'content'
+  assign image_field = block.settings.image_field | default: 'image'
+  assign link_field = block.settings.link_field | default: 'link'
+  assign title_text = ''
+  assign body_text = ''
+  assign image_value = blank
+  assign link_url = ''
+
+  if metaobject != blank
+    assign title_metafield = metaobject[title_field]
+    if title_metafield != blank
+      assign title_text = title_metafield.value | default: title_metafield | strip_html
+    endif
+
+    assign text_metafield = metaobject[text_field]
+    if text_metafield != blank
+      assign body_text = text_metafield | metafield_tag
+    endif
+
+    assign image_metafield = metaobject[image_field]
+    if image_metafield != blank
+      assign image_value = image_metafield.value | default: image_metafield
+    endif
+
+    assign link_metafield = metaobject[link_field]
+    if link_metafield != blank
+      assign link_value = link_metafield.value
+      if link_value.url
+        assign link_url = link_value.url
+      else
+        assign link_url = link_value
+      endif
+    endif
+  elsif block.settings.fallback_text != blank
+    assign body_text = block.settings.fallback_text
+  endif
+
+  assign show_link = link_url != blank and block.settings.link_label != blank
+  assign has_content = title_text != blank or body_text != blank or show_link
+%}
+
+{% if image_value != blank or has_content %}
+  <article class="metaobject-card">
+    {% if image_value != blank %}
+      <div class="metaobject-card__media">
+        {% if link_url != blank %}
+          <a href="{{ link_url }}">
+        {% endif %}
+        {% render 'image', image: image_value, class: 'metaobject-card__image' %}
+        {% if link_url != blank %}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if has_content %}
+      <div class="metaobject-card__content">
+        {% if title_text != blank %}
+          <h3 class="metaobject-card__title">{{ title_text }}</h3>
+        {% endif %}
+
+        {% if body_text != blank %}
+          <div class="metaobject-card__text rte">{{ body_text }}</div>
+        {% endif %}
+
+        {% if show_link %}
+          <a class="metaobject-card__link" href="{{ link_url }}">{{ block.settings.link_label }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </article>
+{% endif %}
+
+{% stylesheet %}
+  .metaobject-card {
+    display: grid;
+    gap: 16px;
+  }
+
+  .metaobject-card__media {
+    border-radius: var(--media-radius, 0);
+    overflow: hidden;
+  }
+
+  .metaobject-card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .metaobject-card__title {
+    margin: 0 0 8px;
+  }
+
+  .metaobject-card__text {
+    margin: 0 0 12px;
+  }
+
+  .metaobject-card__link {
+    color: inherit;
+    text-decoration: underline;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Metaobject card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "metaobject",
+      "id": "metaobject",
+      "label": "Metaobject"
+    },
+    {
+      "type": "text",
+      "id": "title_field",
+      "label": "Title field handle",
+      "default": "title",
+      "info": "Handle du champ titre dans le métaobjet."
+    },
+    {
+      "type": "text",
+      "id": "text_field",
+      "label": "Text field handle",
+      "default": "content",
+      "info": "Handle du champ texte/description dans le métaobjet."
+    },
+    {
+      "type": "text",
+      "id": "image_field",
+      "label": "Image field handle",
+      "default": "image",
+      "info": "Handle du champ image dans le métaobjet."
+    },
+    {
+      "type": "text",
+      "id": "link_field",
+      "label": "Link field handle",
+      "default": "link",
+      "info": "Handle du champ lien dans le métaobjet."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "En savoir plus"
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_text",
+      "label": "Fallback text",
+      "default": "<p>Ajoutez un métaobjet ou un texte de remplacement.</p>"
+    }
+  ]
+}
+{% endschema %}
