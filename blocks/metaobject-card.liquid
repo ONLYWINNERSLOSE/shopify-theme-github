@@ -17,6 +17,13 @@
     endif
 
     assign body_text_metafield = metaobject[text_field]
+    assign text_metafield = metaobject[text_field]
+    if text_metafield != blank
+      assign body_text = text_metafield | metafield_tag
+      capture body_text
+        {{ text_metafield | metafield_tag }}
+      endcapture
+    endif
 
     assign image_metafield = metaobject[image_field]
     if image_metafield != blank
@@ -38,6 +45,13 @@
 
   assign show_link = link_url != blank and block.settings.link_label != blank
   assign has_content = title_text != blank or body_text != blank or body_text_metafield != blank or show_link
+    capture body_text
+      {{ block.settings.fallback_text }}
+    endcapture
+  endif
+
+  assign show_link = link_url != blank and block.settings.link_label != blank
+  assign has_content = title_text != blank or body_text != blank or show_link
 %}
 
 {% if image_value != blank or has_content %}
@@ -63,6 +77,7 @@
         {% if body_text_metafield != blank %}
           <div class="metaobject-card__text rte">{{ body_text_metafield | metafield_tag }}</div>
         {% elsif body_text != blank %}
+        {% if body_text != blank %}
           <div class="metaobject-card__text rte">{{ body_text }}</div>
         {% endif %}
 
