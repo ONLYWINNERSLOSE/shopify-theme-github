@@ -165,6 +165,18 @@
     padding: var(--badge-padding-y-mobile) var(--badge-padding-x-mobile);
   }
 }
+/* Padding badges – desktop */
+.product-badges__badge {
+  padding-inline: var(--badge-padding-x);
+  padding-block: var(--badge-padding-y);
+}
+@media screen and (max-width: 749px) {
+  .product-badges__badge {
+    padding-inline: var(--badge-padding-x-mobile);
+    padding-block: var(--badge-padding-y-mobile);
+  }
+}
+
 {% endstylesheet %}
 
 <script>
