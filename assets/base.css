@@ -4190,4 +4190,15 @@ text-component {
     font-size: var(--badge-state-font-size-mobile, var(--badge-font-size-mobile, 11px)) !important;
   }
 }
+:root {
+  --badge-font-family: "Reenie Beanie";
+  --badge-font-size: 12px;
+  --badge-font-size-mobile: 11px;
+
+  /* optionnel si tu veux différent pour l’état produit */
+  --badge-state-font-size: 12px;
+  --badge-state-font-size-mobile: 11px;
+
+  --badge-gap: 6px;
+}
 
