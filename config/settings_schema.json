@@ -1415,126 +1415,60 @@
       "label": "t:settings.badge_position"
     },
     {
-      "type": "range",
-      "id": "badge_corner_radius",
-      "min": 0,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "label": "t:settings.badge_corner_radius",
-      "default": 40
-    },
-    {
-      "type": "header",
-      "content": "t:settings.colors"
-    },
-    {
-      "type": "color_scheme",
-      "id": "badge_sale_color_scheme",
-      "label": "t:settings.badge_sale_color_scheme",
-      "default": "scheme-4"
-    },
-    {
-      "type": "color_scheme",
-      "id": "badge_sold_out_color_scheme",
-      "label": "t:settings.badge_sold_out_color_scheme",
-      "default": "scheme-5"
-    },
-    {
-      "type": "header",
-      "content": "t:names.typography"
-    },
-    {
-      "type": "select",
-      "id": "badge_font_family",
-      "label": "t:settings.font",
-      "options": [
-        { "value": "body", "label": "t:options.body" },
-        { "value": "subheading", "label": "t:options.subheading" },
-        { "value": "heading", "label": "t:options.heading" },
-        { "value": "accent", "label": "t:options.accent" }
-      ],
-      "default": "body"
-    },
-    {
-      "type": "select",
-      "id": "badge_text_transform",
-      "label": "t:settings.text_case",
-      "options": [
-        { "value": "none", "label": "t:options.default" },
-        { "value": "uppercase", "label": "t:options.uppercase" }
-      ],
-      "default": "none"
-    },
+  "type": "range",
+  "id": "badge_gap",
+  "label": "Espace entre badges (desktop)",
+  "min": 0,
+  "max": 24,
+  "step": 1,
+  "unit": "px",
+  "default": 6
+},
+{
+  "type": "header",
+  "content": "Padding des badges"
+},
+{
+  "type": "range",
+  "id": "badge_padding_x",
+  "label": "Padding horizontal (desktop)",
+  "min": 0,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "default": 10
+},
+{
+  "type": "range",
+  "id": "badge_padding_y",
+  "label": "Padding vertical (desktop)",
+  "min": 0,
+  "max": 30,
+  "step": 1,
+  "unit": "px",
+  "default": 6
+},
+{
+  "type": "range",
+  "id": "badge_padding_x_mobile",
+  "label": "Padding horizontal (mobile)",
+  "min": 0,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "default": 8
+},
+{
+  "type": "range",
+  "id": "badge_padding_y_mobile",
+  "label": "Padding vertical (mobile)",
+  "min": 0,
+  "max": 30,
+  "step": 1,
+  "unit": "px",
+  "default": 5
+}
 
-    {
-      "type": "select",
-      "id": "badge_font_size",
-      "label": "Taille texte badges (desktop)",
-      "options": [
-        { "value": "10", "label": "10px" },
-        { "value": "11", "label": "11px" },
-        { "value": "12", "label": "12px" },
-        { "value": "13", "label": "13px" },
-        { "value": "14", "label": "14px" },
-        { "value": "15", "label": "15px" },
-        { "value": "16", "label": "16px" },
-        { "value": "18", "label": "18px" }
-      ],
-      "default": "12"
-    },
-    {
-      "type": "select",
-      "id": "badge_font_size_mobile",
-      "label": "Taille texte badges (mobile)",
-      "options": [
-        { "value": "9", "label": "9px" },
-        { "value": "10", "label": "10px" },
-        { "value": "11", "label": "11px" },
-        { "value": "12", "label": "12px" },
-        { "value": "13", "label": "13px" },
-        { "value": "14", "label": "14px" },
-        { "value": "15", "label": "15px" }
-      ],
-      "default": "11"
-    },
-    {
-      "type": "select",
-      "id": "badge_state_font_size",
-      "label": "Taille badge état produit (desktop)",
-      "options": [
-        { "value": "9", "label": "9px" },
-        { "value": "10", "label": "10px" },
-        { "value": "11", "label": "11px" },
-        { "value": "12", "label": "12px" },
-        { "value": "13", "label": "13px" },
-        { "value": "14", "label": "14px" }
-      ],
-      "default": "11"
-    },
-    {
-      "type": "select",
-      "id": "badge_state_font_size_mobile",
-      "label": "Taille badge état produit (mobile)",
-      "options": [
-        { "value": "8", "label": "8px" },
-        { "value": "9", "label": "9px" },
-        { "value": "10", "label": "10px" },
-        { "value": "11", "label": "11px" },
-        { "value": "12", "label": "12px" }
-      ],
-      "default": "10"
-    },
-    {
-      "type": "range",
-      "id": "badge_gap_mobile",
-      "label": "Espace entre badges (mobile)",
-      "min": 0,
-      "max": 16,
-      "step": 1,
-      "unit": "px",
-      "default": 6
-    }
   ]
 },
   {
