@@ -193,5 +193,25 @@
     font-size: var(--badge-state-font-size-mobile);
   }
 }
+.product-badges {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+/* Les deux badges doivent avoir la même largeur */
+.product-badges .badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;            /* clé */
+}
+
+/* Pour que width:100% prenne la largeur du badge le plus large */
+.product-badges {
+  width: max-content;     /* clé */
+}
+
 
 {% endstylesheet %}
