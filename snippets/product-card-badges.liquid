@@ -73,93 +73,38 @@
 </div>
 
 
-{% stylesheet %}
-  .product-badges {
-    --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
-
-    position: absolute;
-    z-index: var(--layer-flat);
-  }
-
-  .product-badges--bottom-left {
-    bottom: calc(var(--badge-inset) + var(--padding-block-start));
-    left: calc(var(--badge-inset) + var(--padding-inline-start));
-  }
-
-  .product-badges--top-left {
-    top: calc(var(--badge-inset) + var(--padding-block-start));
-    left: calc(var(--badge-inset) + var(--padding-inline-start));
-  }
-
-  .product-badges--top-right {
-    top: calc(var(--badge-inset) + var(--padding-block-start));
-    right: calc(var(--badge-inset) + var(--padding-inline-start));
-  }
-
-  .product-badges__badge {
-    --badge-font-size: var(--font-size--xs);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--color-foreground);
-    background: var(--color-background);
-    font-size: var(--badge-font-size);
-    font-family: var(--badge-font-family);
-    font-weight: var(--badge-font-weight);
-    text-transform: var(--badge-text-transform);
-    border-radius: var(--badge-border-radius);
-  }
-
-  .product-badges__badge--rectangle {
-    padding-block: var(--badge-rectangle-padding-block);
-    padding-inline: var(--badge-rectangle-padding-inline);
-  }
-
-  /* --- Styles pour vos badges personnalisés (avec !important pour forcer si besoin) --- */
-  .badge--custom-made {
-    background-color: #b87200 !important;
-    color: #7d4e24 !important;
-  }
-  .badge--custom-studio {
-    background-color: #8f9090 !important;
-    color: #000000 !important;
-  }
-  .badge--custom-creative {
-    background-color: #1b72b9 !important;
-    color: #fff !important;
-  }
-  .badge--custom-new {
-    background-color: #28a745 !important;
-    color: #fff !important;
-  }
-
-  .badge--custom-archive {
-    background-color: #6c757d !important;
-    color: #fff !important;
-  }
-  .badge--custom-soon {
-    background-color: #7673BF !important;
-    color: #000000 !important;
-  }
-  .badge--custom-preorder {
-    background-color: #ffc107 !important;
-    color: #000000 !important;
-  }
-  .product-badges {
+.product-badges {
   --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
 
   position: absolute;
   z-index: var(--layer-flat);
 
-  /* IMPORTANT: badges empilés */
-  display: flex;
+  /* Empiler les badges */
+  display: inline-flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--badge-gap);
   align-items: flex-start;
+
+  /* Pour que la largeur devienne celle du badge le plus large */
+  width: max-content;
 }
 
+.product-badges--bottom-left {
+  bottom: calc(var(--badge-inset) + var(--padding-block-start));
+  left: calc(var(--badge-inset) + var(--padding-inline-start));
+}
+
+.product-badges--top-left {
+  top: calc(var(--badge-inset) + var(--padding-block-start));
+  left: calc(var(--badge-inset) + var(--padding-inline-start));
+}
+
+.product-badges--top-right {
+  top: calc(var(--badge-inset) + var(--padding-block-start));
+  right: calc(var(--badge-inset) + var(--padding-inline-start));
+}
+
+/* Badge (base) */
 .product-badges__badge {
   display: inline-flex;
   align-items: center;
@@ -169,22 +114,33 @@
   color: var(--color-foreground);
   background: var(--color-background);
 
-  font-size: var(--badge-font-size);
   font-family: var(--badge-font-family);
   font-weight: var(--badge-font-weight);
   text-transform: var(--badge-text-transform);
-
   border-radius: var(--badge-border-radius);
+
   white-space: nowrap;
 }
 
+/* Rectangle padding (si tes variables existent dans le thème) */
 .product-badges__badge--rectangle {
-  padding-block: var(--badge-rectangle-padding-block);
-  padding-inline: var(--badge-rectangle-padding-inline);
+  padding-block: var(--badge-rectangle-padding-block, 6px);
+  padding-inline: var(--badge-rectangle-padding-inline, 10px);
 }
 
-/* Badge état produit (en dessous) */
-.badge--state {
+/* ✅ Les deux badges prennent la même largeur */
+.product-badges .badge-pill {
+  width: 100%;
+}
+
+/* Tailles */
+.product-badges .badge-pill {
+  font-size: var(--badge-font-size);
+  line-height: 1;
+}
+
+/* Badge état (en dessous) - taille dédiée */
+.product-badges .badge--state {
   font-size: var(--badge-state-font-size);
   opacity: 0.9;
 }
@@ -195,47 +151,20 @@
     gap: var(--badge-gap-mobile);
   }
 
-  .product-badges__badge {
-    font-size: var(--badge-font-size-mobile);
-  }
-
-  .badge--state {
-    font-size: var(--badge-state-font-size-mobile);
-  }
-}
-.product-badges {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-start;
-}
-
-/* Les deux badges doivent avoir la même largeur */
-.product-badges .badge-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;            /* clé */
-}
-
-/* Pour que width:100% prenne la largeur du badge le plus large */
-.product-badges {
-  width: max-content;     /* clé */
-}
-.product-badges .badge-pill {
-  font-family: var(--badge-font-family);
-  font-weight: var(--badge-font-weight);
-  text-transform: var(--badge-text-transform);
-  font-size: var(--badge-font-size);
-  line-height: 1;
-}
-
-/* mobile */
-@media (max-width: 749px) {
   .product-badges .badge-pill {
     font-size: var(--badge-font-size-mobile);
   }
+
+  .product-badges .badge--state {
+    font-size: var(--badge-state-font-size-mobile);
+  }
 }
 
-
-{% endstylesheet %}
+/* Couleurs custom */
+.badge--custom-made { background-color: #b87200 !important; color: #7d4e24 !important; }
+.badge--custom-studio { background-color: #8f9090 !important; color: #000000 !important; }
+.badge--custom-creative { background-color: #1b72b9 !important; color: #fff !important; }
+.badge--custom-new { background-color: #28a745 !important; color: #fff !important; }
+.badge--custom-archive { background-color: #6c757d !important; color: #fff !important; }
+.badge--custom-soon { background-color: #7673BF !important; color: #000000 !important; }
+.badge--custom-preorder { background-color: #ffc107 !important; color: #000000 !important; }
