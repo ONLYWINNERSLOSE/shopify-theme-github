@@ -183,8 +183,15 @@
 }
 .product-badges__badge .badge-text {
   display: inline-block;
-  transform: scaleX(2.25095);
   transform-origin: center;
+  letter-spacing: -0.075em;
+  transform: scaleX(2.25095);
+}
+
+@media screen and (max-width: 749px) {
+  .product-badges__badge .badge-text {
+    transform: scaleX(2.25095); /* tu peux mettre une autre valeur si besoin */
+  }
 }
 
 {% endstylesheet %}
