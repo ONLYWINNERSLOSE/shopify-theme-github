@@ -72,7 +72,7 @@
   {{ state_badge }}
 </div>
 
-
+{% stylesheet %}
 .product-badges {
   --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
 
@@ -168,3 +168,4 @@
 .badge--custom-archive { background-color: #6c757d !important; color: #fff !important; }
 .badge--custom-soon { background-color: #7673BF !important; color: #000000 !important; }
 .badge--custom-preorder { background-color: #ffc107 !important; color: #000000 !important; }
+{% endstylesheet%}
