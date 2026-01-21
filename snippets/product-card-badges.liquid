@@ -25,37 +25,37 @@
   {%- comment -%} Badge principal (en haut) {%- endcomment -%}
   {%- if product.tags contains 'soon' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">Soon</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'archive' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">Archivé</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_studio' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">Studio</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_made' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">Made</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_creative' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">Creative</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'preorder' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">Précommande</span>
       </div>
     {%- endcapture -%}
@@ -93,12 +93,11 @@
   position: absolute;
   z-index: var(--layer-flat);
 
-  /* badges empilés */
   display: inline-flex;
   flex-direction: column;
   gap: 6px;
 
-  /* largeur = largeur du plus large badge (les deux s'alignent) */
+  /* largeur identique pour les deux badges */
   width: max-content;
   align-items: stretch;
 }
@@ -130,22 +129,22 @@
   border-radius: var(--badge-border-radius);
   white-space: nowrap;
 
-  /* on garde la taille du badge, le texte doit rentrer */
+  /* le badge ne grandit jamais */
   overflow: hidden;
 }
 
-/* Rectangle padding */
+/* Padding identique HAUT + BAS */
 .product-badges__badge--rectangle {
   padding-block: var(--badge-rectangle-padding-block);
   padding-inline: var(--badge-rectangle-padding-inline);
 }
 
-/* Les 2 badges prennent la même largeur (celle du conteneur) */
+/* largeur commune */
 .product-badges .badge-pill {
   width: 100%;
 }
 
-/* ===== Typography ===== */
+/* Typography desktop */
 .product-badges .badge-pill {
   font-family: var(--badge-font-family);
   font-weight: var(--badge-font-weight);
@@ -153,7 +152,7 @@
   font-size: var(--badge-font-size);
 }
 
-/* Badge état : taille différente */
+/* badge état */
 .product-badges .badge-pill.badge--state {
   font-size: var(--badge-state-font-size);
   opacity: 0.9;
@@ -174,32 +173,31 @@
   }
 }
 
-/* ===== Text inner (fit) ===== */
+/* ===== Texte (fit + scaleX) ===== */
 .product-badges__badge .badge-text {
   display: inline-block;
   font-family: inherit;
   font-weight: inherit;
-  text-transform: none; /* sécurité anti-majuscules */
-  letter-spacing: var(--badge-letter-spacing);
-  transform-origin: center;
+  text-transform: none;
   white-space: nowrap;
 
-  /* scaleX demandé * fit calculé (par défaut 1) */
+  letter-spacing: var(--badge-letter-spacing);
+  transform-origin: center;
+
+  /* scaleX demandé × fit automatique */
   transform: scaleX(calc(var(--badge-scale-x) * var(--badge-fit-x, 1)));
 }
 {% endstylesheet %}
 
 <script>
-/* Fit texte -> le badge ne grandit jamais */
+/* Fit automatique du texte : le badge ne s’agrandit jamais */
 (function () {
   function fitOne(badge) {
     const text = badge.querySelector('.badge-text');
     if (!text) return;
 
-    // reset fit
     text.style.setProperty('--badge-fit-x', 1);
 
-    // largeur dispo dans le badge (sans padding)
     const s = getComputedStyle(badge);
     const pl = parseFloat(s.paddingLeft) || 0;
     const pr = parseFloat(s.paddingRight) || 0;
@@ -207,11 +205,9 @@
 
     if (available <= 0) return;
 
-    // largeur réellement utilisée par le texte (après scaleX / letter-spacing)
     const used = text.getBoundingClientRect().width;
     if (used <= 0) return;
 
-    // si ça déborde : on compresse en X
     const fitX = Math.min(1, available / used);
     text.style.setProperty('--badge-fit-x', fitX.toFixed(4));
   }
@@ -230,7 +226,6 @@
 
   window.addEventListener('resize', run);
 
-  // si ton thème recharge des cards (facets/pagination/infinite scroll)
   const obs = new MutationObserver(() => run());
   obs.observe(document.documentElement, { childList: true, subtree: true });
 })();
