@@ -1,9 +1,10 @@
-<<div
+<div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
     --badge-border-radius: {{ settings.badge_corner_radius }}px;
 
     --badge-font-family: 'Reenie Beanie', cursive;
+    --badge-font-weight: 400;
     --badge-text-transform: none;
 
     --badge-font-size: {{ settings.badge_font_size }}px;
@@ -13,12 +14,11 @@
     --badge-state-font-size-mobile: {{ settings.badge_state_font_size_mobile }}px;
 
     --badge-letter-spacing: -0.075em;
+    --badge-scale-x: 2.25095;
+
     --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
   "
 >
-
-
-
 
   {%- assign main_badge = '' -%}
   {%- assign state_badge = '' -%}
