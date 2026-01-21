@@ -212,6 +212,20 @@
 .product-badges {
   width: max-content;     /* clé */
 }
+.product-badges .badge-pill {
+  font-family: var(--badge-font-family);
+  font-weight: var(--badge-font-weight);
+  text-transform: var(--badge-text-transform);
+  font-size: var(--badge-font-size);
+  line-height: 1;
+}
+
+/* mobile */
+@media (max-width: 749px) {
+  .product-badges .badge-pill {
+    font-size: var(--badge-font-size-mobile);
+  }
+}
 
 
 {% endstylesheet %}
