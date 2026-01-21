@@ -1,27 +1,26 @@
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
-    --badge-border-radius: {{ settings.badge_corner_radius }}px;
+  --badge-border-radius: {{ settings.badge_corner_radius }}px;
 
-    --badge-font-family: 'Reenie Beanie', cursive;
-    --badge-font-weight: 400;
-    --badge-text-transform: none;
+  --badge-font-family: 'Reenie Beanie', cursive;
+  --badge-font-weight: 400;
+  --badge-text-transform: none;
 
-    --badge-font-size: {{ settings.badge_font_size }}px;
-    --badge-font-size-mobile: {{ settings.badge_font_size_mobile }}px;
+  --badge-font-size: {{ settings.badge_font_size }}px;
+  --badge-font-size-mobile: {{ settings.badge_font_size_mobile }}px;
 
-    --badge-padding-x: {{ settings.badge_padding_x }}px;
-    --badge-padding-y: {{ settings.badge_padding_y }}px;
+  --badge-letter-spacing: -0.075em;
+  --badge-scale-x: 2.25095;
 
-    --badge-padding-x-mobile: {{ settings.badge_padding_x_mobile }}px;
-    --badge-padding-y-mobile: {{ settings.badge_padding_y_mobile }}px;
+  --badge-gap: {{ settings.badge_gap }}px;
+  --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
 
-    --badge-gap: {{ settings.badge_gap }}px;
-    --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
-
-    --badge-letter-spacing: -0.075em;
-    --badge-scale-x: 2.25095;
-  "
+  --badge-padding-x: {{ settings.badge_padding_x }}px;
+  --badge-padding-y: {{ settings.badge_padding_y }}px;
+  --badge-padding-x-mobile: {{ settings.badge_padding_x_mobile }}px;
+  --badge-padding-y-mobile: {{ settings.badge_padding_y_mobile }}px;
+"
 >
   {%- assign main_badge = '' -%}
   {%- assign state_badge = '' -%}
