@@ -63,23 +63,32 @@
   {%- endif -%}
 
   {%- comment -%} Badge état produit (en dessous) {%- endcomment -%}
-  {%- if product.available == false -%}
-    {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sold_out_color_scheme }}">
+{%- if product.available == false -%}
+  {%- capture state_badge -%}
+    <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sold_out_color_scheme }}">
+      <span class="badge-text">
         {{ 'content.product_badge_sold_out' | t }}
-      </div>
-    {%- endcapture -%}
-  {%- elsif product.compare_at_price > product.price -%}
-    {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sale_color_scheme }}">
+      </span>
+    </div>
+  {%- endcapture -%}
+
+{%- elsif product.compare_at_price > product.price -%}
+  {%- capture state_badge -%}
+    <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sale_color_scheme }}">
+      <span class="badge-text">
         {{ 'content.product_badge_sale' | t }}
-      </div>
-    {%- endcapture -%}
-  {%- elsif product.tags contains 'new' -%}
-    {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-new badge--state">New</div>
-    {%- endcapture -%}
-  {%- endif -%}
+      </span>
+    </div>
+  {%- endcapture -%}
+
+{%- elsif product.tags contains 'new' -%}
+  {%- capture state_badge -%}
+    <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-new badge--state">
+      <span class="badge-text">New</span>
+    </div>
+  {%- endcapture -%}
+{%- endif -%}
+
 
   {{ main_badge }}
   {{ state_badge }}
