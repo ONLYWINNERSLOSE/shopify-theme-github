@@ -4128,3 +4128,14 @@ text-component {
     font-size: var(--badge-font-size-mobile, 11px) !important;
   }
 }
+.product-badges .product-badges__state,
+.product-badges .product-badges__state * {
+  font-size: var(--badge-state-font-size, var(--badge-font-size, 12px)) !important;
+}
+
+@media screen and (max-width: 749px) {
+  .product-badges .product-badges__state,
+  .product-badges .product-badges__state * {
+    font-size: var(--badge-state-font-size-mobile, var(--badge-font-size-mobile, 11px)) !important;
+  }
+}
