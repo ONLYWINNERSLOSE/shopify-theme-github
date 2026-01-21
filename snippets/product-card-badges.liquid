@@ -23,8 +23,6 @@
   {%- if product.tags contains 'soon' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge product-badges__badge--rectangle badge--custom-soon">Soon</div>
-      <!-- DEBUG badge_font_size: {{ settings.badge_font_size }} / mobile: {{ settings.badge_font_size_mobile }} -->
-
     {%- endcapture -%}
   {%- elsif product.tags contains 'archive' -%}
     {%- capture main_badge -%}
