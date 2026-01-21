@@ -160,5 +160,14 @@
 .product-badges__badge {
   letter-spacing: var(--badge-letter-spacing);
 }
+.product-badges__badge {
+  overflow: hidden; /* sécurité */
+}
+
+.product-badges__badge > * {
+  display: inline-block;
+  transform: scaleX(var(--badge-scale-x));
+  transform-origin: center;
+}
 
 {% endstylesheet %}
