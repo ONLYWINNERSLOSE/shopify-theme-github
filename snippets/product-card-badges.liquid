@@ -7,11 +7,9 @@
     --badge-font-weight: 400;
     --badge-text-transform: none;
 
+    /* UNE SEULE TAILLE POUR TOUS */
     --badge-font-size: {{ settings.badge_font_size }}px;
     --badge-font-size-mobile: {{ settings.badge_font_size_mobile }}px;
-
-    --badge-state-font-size: {{ settings.badge_state_font_size }}px;
-    --badge-state-font-size-mobile: {{ settings.badge_state_font_size_mobile }}px;
 
     --badge-letter-spacing: -0.075em;
     --badge-scale-x: 2.25095;
@@ -64,19 +62,19 @@
   {%- comment -%} Badge état produit (en dessous) {%- endcomment -%}
   {%- if product.available == false -%}
     {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sold_out_color_scheme }}">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
         <span class="badge-text">{{ 'content.product_badge_sold_out' | t }}</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.compare_at_price > product.price -%}
     {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sale_color_scheme }}">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
         <span class="badge-text">{{ 'content.product_badge_sale' | t }}</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'new' -%}
     {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-new badge--state">
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
         <span class="badge-text">New</span>
       </div>
     {%- endcapture -%}
@@ -97,7 +95,6 @@
   flex-direction: column;
   gap: 6px;
 
-  /* largeur identique pour les deux badges */
   width: max-content;
   align-items: stretch;
 }
@@ -129,8 +126,13 @@
   border-radius: var(--badge-border-radius);
   white-space: nowrap;
 
-  /* le badge ne grandit jamais */
   overflow: hidden;
+
+  /* PARAMS IDENTIQUES POUR TOUS */
+  font-family: var(--badge-font-family);
+  font-weight: var(--badge-font-weight);
+  text-transform: var(--badge-text-transform);
+  font-size: var(--badge-font-size);
 }
 
 /* Padding identique HAUT + BAS */
@@ -144,32 +146,14 @@
   width: 100%;
 }
 
-/* Typography desktop */
-.product-badges .badge-pill {
-  font-family: var(--badge-font-family);
-  font-weight: var(--badge-font-weight);
-  text-transform: var(--badge-text-transform);
-  font-size: var(--badge-font-size);
-}
-
-/* badge état */
-.product-badges .badge-pill.badge--state {
-  font-size: var(--badge-state-font-size);
-  opacity: 0.9;
-}
-
 /* Mobile */
 @media screen and (max-width: 749px) {
   .product-badges {
     gap: var(--badge-gap-mobile);
   }
 
-  .product-badges .badge-pill {
+  .product-badges__badge {
     font-size: var(--badge-font-size-mobile);
-  }
-
-  .product-badges .badge-pill.badge--state {
-    font-size: var(--badge-state-font-size-mobile);
   }
 }
 
@@ -184,13 +168,11 @@
   letter-spacing: var(--badge-letter-spacing);
   transform-origin: center;
 
-  /* scaleX demandé × fit automatique */
   transform: scaleX(calc(var(--badge-scale-x) * var(--badge-fit-x, 1)));
 }
 {% endstylesheet %}
 
 <script>
-/* Fit automatique du texte : le badge ne s’agrandit jamais */
 (function () {
   function fitOne(badge) {
     const text = badge.querySelector('.badge-text');
@@ -202,7 +184,6 @@
     const pl = parseFloat(s.paddingLeft) || 0;
     const pr = parseFloat(s.paddingRight) || 0;
     const available = badge.clientWidth - pl - pr;
-
     if (available <= 0) return;
 
     const used = text.getBoundingClientRect().width;
