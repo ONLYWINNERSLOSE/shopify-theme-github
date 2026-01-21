@@ -4138,4 +4138,56 @@ text-component {
   .product-badges .product-badges__state * {
     font-size: var(--badge-state-font-size-mobile, var(--badge-font-size-mobile, 11px)) !important;
   }
+}/* ==========================================================
+   PRODUCT BADGES — 2 badges empilés, même largeur + typo
+   ========================================================== */
+
+/* 1) Stack vertical + même largeur */
+.product-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* force la même largeur */
+  gap: var(--badge-gap, 6px);
+  width: var(--badge-width, auto); /* optionnel : auto par défaut */
 }
+
+/* Cible les badges "directs" (évite de casser des sous-éléments internes) */
+.product-badges > * {
+  width: 100%;
+}
+
+/* Si tes badges sont des spans/div inline, on force un comportement "bloc" */
+.product-badges > :is(span, a, button) {
+  display: block;
+}
+
+/* 2) Typo globale badges (police + taille via variables) */
+.product-badges,
+.product-badges * {
+  font-family: var(--badge-font-family, inherit) !important;
+  font-size: var(--badge-font-size, 12px) !important;
+  line-height: var(--badge-line-height, 1.1) !important;
+}
+
+/* Mobile : taille différente */
+@media screen and (max-width: 749px) {
+  .product-badges,
+  .product-badges * {
+    font-size: var(--badge-font-size-mobile, 11px) !important;
+  }
+}
+
+/* 3) Typo spécifique "état produit" si tu veux la différencier */
+.product-badges .product-badges__state,
+.product-badges .product-badges__state * {
+  font-size: var(--badge-state-font-size, var(--badge-font-size, 12px)) !important;
+  font-family: var(--badge-state-font-family, var(--badge-font-family, inherit)) !important;
+}
+
+@media screen and (max-width: 749px) {
+  .product-badges .product-badges__state,
+  .product-badges .product-badges__state * {
+    font-size: var(--badge-state-font-size-mobile, var(--badge-font-size-mobile, 11px)) !important;
+  }
+}
+
