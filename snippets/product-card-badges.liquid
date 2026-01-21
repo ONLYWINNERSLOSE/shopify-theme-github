@@ -19,7 +19,6 @@
     --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
   "
 >
-
   {%- assign main_badge = '' -%}
   {%- assign state_badge = '' -%}
 
@@ -27,74 +26,68 @@
   {%- if product.tags contains 'soon' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge badge-pill">
-  <span class="badge-text">Soon</span>
-</div>
+        <span class="badge-text">Soon</span>
+      </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'archive' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge badge-pill">
-  <span class="badge-text">Archivé</span>
-</div>
+        <span class="badge-text">Archivé</span>
+      </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_studio' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge badge-pill">
-  <span class="badge-text">Studio</span>
-</div>
+        <span class="badge-text">Studio</span>
+      </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_made' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge badge-pill">
-  <span class="badge-text">Made</span>
-</div>
+        <span class="badge-text">Made</span>
+      </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_creative' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge badge-pill">
-  <span class="badge-text">Creative</span>
-</div>
+        <span class="badge-text">Creative</span>
+      </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'preorder' -%}
     {%- capture main_badge -%}
       <div class="product-badges__badge badge-pill">
-  <span class="badge-text">Précommande</span>
-</div>
+        <span class="badge-text">Précommande</span>
+      </div>
     {%- endcapture -%}
   {%- endif -%}
 
   {%- comment -%} Badge état produit (en dessous) {%- endcomment -%}
-{%- if product.available == false -%}
-  {%- capture state_badge -%}
-    <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sold_out_color_scheme }}">
-      <span class="badge-text">
-        {{ 'content.product_badge_sold_out' | t }}
-      </span>
-    </div>
-  {%- endcapture -%}
-
-{%- elsif product.compare_at_price > product.price -%}
-  {%- capture state_badge -%}
-    <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sale_color_scheme }}">
-      <span class="badge-text">
-        {{ 'content.product_badge_sale' | t }}
-      </span>
-    </div>
-  {%- endcapture -%}
-
-{%- elsif product.tags contains 'new' -%}
-  {%- capture state_badge -%}
-    <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-new badge--state">
-      <span class="badge-text">New</span>
-    </div>
-  {%- endcapture -%}
-{%- endif -%}
-
+  {%- if product.available == false -%}
+    {%- capture state_badge -%}
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sold_out_color_scheme }}">
+        <span class="badge-text">{{ 'content.product_badge_sold_out' | t }}</span>
+      </div>
+    {%- endcapture -%}
+  {%- elsif product.compare_at_price > product.price -%}
+    {%- capture state_badge -%}
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--state color-{{ settings.badge_sale_color_scheme }}">
+        <span class="badge-text">{{ 'content.product_badge_sale' | t }}</span>
+      </div>
+    {%- endcapture -%}
+  {%- elsif product.tags contains 'new' -%}
+    {%- capture state_badge -%}
+      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-new badge--state">
+        <span class="badge-text">New</span>
+      </div>
+    {%- endcapture -%}
+  {%- endif -%}
 
   {{ main_badge }}
   {{ state_badge }}
 </div>
 
 {% stylesheet %}
+/* ===== Container ===== */
 .product-badges {
   --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
   position: absolute;
@@ -105,9 +98,9 @@
   flex-direction: column;
   gap: 6px;
 
-  /* clé pour largeur identique */
+  /* largeur = largeur du plus large badge (les deux s'alignent) */
   width: max-content;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 /* positions */
@@ -124,7 +117,7 @@
   right: calc(var(--badge-inset) + var(--padding-inline-start));
 }
 
-/* base badge */
+/* ===== Badge ===== */
 .product-badges__badge {
   display: inline-flex;
   align-items: center;
@@ -134,37 +127,39 @@
   color: var(--color-foreground);
   background: var(--color-background);
 
-  font-family: var(--badge-font-family);
-  font-weight: var(--badge-font-weight);
-  text-transform: var(--badge-text-transform);
-
   border-radius: var(--badge-border-radius);
   white-space: nowrap;
+
+  /* on garde la taille du badge, le texte doit rentrer */
+  overflow: hidden;
 }
 
-/* rectangle padding */
+/* Rectangle padding */
 .product-badges__badge--rectangle {
   padding-block: var(--badge-rectangle-padding-block);
   padding-inline: var(--badge-rectangle-padding-inline);
 }
 
-/* classe commune pour largeur identique */
+/* Les 2 badges prennent la même largeur (celle du conteneur) */
 .product-badges .badge-pill {
   width: 100%;
 }
 
-/* tailles desktop */
+/* ===== Typography ===== */
 .product-badges .badge-pill {
+  font-family: var(--badge-font-family);
+  font-weight: var(--badge-font-weight);
+  text-transform: var(--badge-text-transform);
   font-size: var(--badge-font-size);
 }
 
-/* badge état : taille différente */
+/* Badge état : taille différente */
 .product-badges .badge-pill.badge--state {
   font-size: var(--badge-state-font-size);
   opacity: 0.9;
 }
 
-/* mobile */
+/* Mobile */
 @media screen and (max-width: 749px) {
   .product-badges {
     gap: var(--badge-gap-mobile);
@@ -178,29 +173,65 @@
     font-size: var(--badge-state-font-size-mobile);
   }
 }
-.product-badges__badge {
-  letter-spacing: var(--badge-letter-spacing);
-}
-.product-badges__badge {
-  overflow: hidden; /* sécurité */
-}
 
-.product-badges__badge > * {
-  display: inline-block;
-  transform: scaleX(var(--badge-scale-x));
-  transform-origin: center;
-}
+/* ===== Text inner (fit) ===== */
 .product-badges__badge .badge-text {
   display: inline-block;
+  font-family: inherit;
+  font-weight: inherit;
+  text-transform: none; /* sécurité anti-majuscules */
+  letter-spacing: var(--badge-letter-spacing);
   transform-origin: center;
-  letter-spacing: -0.075em;
-  transform: scaleX(2.25095);
-}
+  white-space: nowrap;
 
-@media screen and (max-width: 749px) {
-  .product-badges__badge .badge-text {
-    transform: scaleX(2.25095); /* tu peux mettre une autre valeur si besoin */
-  }
+  /* scaleX demandé * fit calculé (par défaut 1) */
+  transform: scaleX(calc(var(--badge-scale-x) * var(--badge-fit-x, 1)));
 }
-
 {% endstylesheet %}
+
+<script>
+/* Fit texte -> le badge ne grandit jamais */
+(function () {
+  function fitOne(badge) {
+    const text = badge.querySelector('.badge-text');
+    if (!text) return;
+
+    // reset fit
+    text.style.setProperty('--badge-fit-x', 1);
+
+    // largeur dispo dans le badge (sans padding)
+    const s = getComputedStyle(badge);
+    const pl = parseFloat(s.paddingLeft) || 0;
+    const pr = parseFloat(s.paddingRight) || 0;
+    const available = badge.clientWidth - pl - pr;
+
+    if (available <= 0) return;
+
+    // largeur réellement utilisée par le texte (après scaleX / letter-spacing)
+    const used = text.getBoundingClientRect().width;
+    if (used <= 0) return;
+
+    // si ça déborde : on compresse en X
+    const fitX = Math.min(1, available / used);
+    text.style.setProperty('--badge-fit-x', fitX.toFixed(4));
+  }
+
+  function fitAll(root) {
+    (root || document).querySelectorAll('.product-badges__badge').forEach(fitOne);
+  }
+
+  const run = () => requestAnimationFrame(() => fitAll());
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+
+  window.addEventListener('resize', run);
+
+  // si ton thème recharge des cards (facets/pagination/infinite scroll)
+  const obs = new MutationObserver(() => run());
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
