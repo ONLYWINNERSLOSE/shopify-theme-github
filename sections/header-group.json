@@ -49,8 +49,8 @@
             "type_font_tertiary_link": "secondary",
             "type_case_tertiary_link": "none",
             "navigation_bar": false,
-            "color_scheme_navigation_bar": "scheme-3",
-            "drawer_accordion": true,
+            "color_scheme_navigation_bar": "scheme-1",
+            "drawer_accordion": false,
             "drawer_accordion_expand_first": true,
             "drawer_dividers": false
           },

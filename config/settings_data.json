@@ -113,33 +113,6 @@
         "disabled": false,
         "settings": {}
       },
-      "1057056175266400017": {
-        "type": "shopify://apps/yotpo-email-marketing-sms/blocks/app-embed/7a4b8bd9-dff0-44fc-aef9-a187a77a5d45",
-        "disabled": false,
-        "settings": {}
-      },
-      "13609927367465594311": {
-        "type": "shopify://apps/scalapay-on-site-messaging/blocks/widget-embed-block/3be66716-9837-4466-bbb5-839858e44339",
-        "disabled": false,
-        "settings": {
-          "merchant_token": "",
-          "pay_in_3_widgets": "",
-          "pay_in_3_countries": "AT,BE,FI,FR,DE,IT,NL,PT,ES,YT,RE,GF,GP,MQ",
-          "pay_in_3_min_amount": 5,
-          "pay_in_3_max_amount": 1500,
-          "pay_in_3_currency_position": "after",
-          "pay_in_3_currency_display": "symbol",
-          "pay_in_3_amount_separator": "",
-          "pay_in_3_hide_installments": "false",
-          "pay_in_3_hide_learn_more": "false",
-          "pay_in_3_style": "display: block;",
-          "pay_in_3_product_dark_mode": "never",
-          "pay_in_3_product_alignment": "left",
-          "pay_in_3_cart_dark_mode": "never",
-          "pay_in_3_cart_alignment": "left",
-          "style_global": ""
-        }
-      },
       "15119538188275799212": {
         "type": "shopify://apps/fontify/blocks/app-embed/334490e2-2153-4a2e-a452-e90bdeffa3cc",
         "disabled": false,
