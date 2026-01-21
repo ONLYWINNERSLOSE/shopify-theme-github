@@ -4116,3 +4116,7 @@ text-component {
   transform: none;
   box-shadow: none;
 }
+/* TEST BADGE */
+.product-badges, .product-badges * {
+  font-size: 30px !important;
+}
