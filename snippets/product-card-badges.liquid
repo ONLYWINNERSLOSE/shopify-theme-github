@@ -26,27 +26,39 @@
   {%- comment -%} Badge principal (en haut) {%- endcomment -%}
   {%- if product.tags contains 'soon' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-soon">Soon</div>
+      <div class="product-badges__badge badge-pill">
+  <span class="badge-text">Soon</span>
+</div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'archive' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-archive">Archivé</div>
+      <div class="product-badges__badge badge-pill">
+  <span class="badge-text">Archivé</span>
+</div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_studio' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-studio">Studio</div>
+      <div class="product-badges__badge badge-pill">
+  <span class="badge-text">Studio</span>
+</div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_made' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-made">Made</div>
+      <div class="product-badges__badge badge-pill">
+  <span class="badge-text">Made</span>
+</div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_creative' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-creative">Creative</div>
+      <div class="product-badges__badge badge-pill">
+  <span class="badge-text">Creative</span>
+</div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'preorder' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle badge--custom-preorder">Précommande</div>
+      <div class="product-badges__badge badge-pill">
+  <span class="badge-text">Précommande</span>
+</div>
     {%- endcapture -%}
   {%- endif -%}
 
