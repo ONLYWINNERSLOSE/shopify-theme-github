@@ -24,6 +24,27 @@
         badge--custom-archive
       "
     >Archivé</div>
+    {% elsif product_tags contains 'owl_studio' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-studio
+      "
+    >Studio</div>
+    {% elsif product_tags contains 'owl_made' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-made
+      "
+    >Made</div>
+    {% elsif product_tags contains 'owl_creative' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-creative
+      "
+    >Creative</div>
    {% elsif product_tags contains 'preorder' %}
     <div
       class="
