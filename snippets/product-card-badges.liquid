@@ -75,36 +75,34 @@
 {% stylesheet %}
 .product-badges {
   --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
-
   position: absolute;
   z-index: var(--layer-flat);
 
-  /* Empiler les badges */
+  /* badges empilés */
   display: inline-flex;
   flex-direction: column;
-  gap: var(--badge-gap);
-  align-items: flex-start;
+  gap: 6px;
 
-  /* Pour que la largeur devienne celle du badge le plus large */
+  /* clé pour largeur identique */
   width: max-content;
+  align-items: flex-start;
 }
 
+/* positions */
 .product-badges--bottom-left {
   bottom: calc(var(--badge-inset) + var(--padding-block-start));
   left: calc(var(--badge-inset) + var(--padding-inline-start));
 }
-
 .product-badges--top-left {
   top: calc(var(--badge-inset) + var(--padding-block-start));
   left: calc(var(--badge-inset) + var(--padding-inline-start));
 }
-
 .product-badges--top-right {
   top: calc(var(--badge-inset) + var(--padding-block-start));
   right: calc(var(--badge-inset) + var(--padding-inline-start));
 }
 
-/* Badge (base) */
+/* base badge */
 .product-badges__badge {
   display: inline-flex;
   align-items: center;
@@ -117,35 +115,34 @@
   font-family: var(--badge-font-family);
   font-weight: var(--badge-font-weight);
   text-transform: var(--badge-text-transform);
-  border-radius: var(--badge-border-radius);
 
+  border-radius: var(--badge-border-radius);
   white-space: nowrap;
 }
 
-/* Rectangle padding (si tes variables existent dans le thème) */
+/* rectangle padding */
 .product-badges__badge--rectangle {
-  padding-block: var(--badge-rectangle-padding-block, 6px);
-  padding-inline: var(--badge-rectangle-padding-inline, 10px);
+  padding-block: var(--badge-rectangle-padding-block);
+  padding-inline: var(--badge-rectangle-padding-inline);
 }
 
-/* ✅ Les deux badges prennent la même largeur */
+/* classe commune pour largeur identique */
 .product-badges .badge-pill {
   width: 100%;
 }
 
-/* Tailles */
+/* tailles desktop */
 .product-badges .badge-pill {
   font-size: var(--badge-font-size);
-  line-height: 1;
 }
 
-/* Badge état (en dessous) - taille dédiée */
-.product-badges .badge--state {
+/* badge état : taille différente */
+.product-badges .badge-pill.badge--state {
   font-size: var(--badge-state-font-size);
   opacity: 0.9;
 }
 
-/* Mobile */
+/* mobile */
 @media screen and (max-width: 749px) {
   .product-badges {
     gap: var(--badge-gap-mobile);
@@ -155,17 +152,8 @@
     font-size: var(--badge-font-size-mobile);
   }
 
-  .product-badges .badge--state {
+  .product-badges .badge-pill.badge--state {
     font-size: var(--badge-state-font-size-mobile);
   }
 }
-
-/* Couleurs custom */
-.badge--custom-made { background-color: #b87200 !important; color: #7d4e24 !important; }
-.badge--custom-studio { background-color: #8f9090 !important; color: #000000 !important; }
-.badge--custom-creative { background-color: #1b72b9 !important; color: #fff !important; }
-.badge--custom-new { background-color: #28a745 !important; color: #fff !important; }
-.badge--custom-archive { background-color: #6c757d !important; color: #fff !important; }
-.badge--custom-soon { background-color: #7673BF !important; color: #000000 !important; }
-.badge--custom-preorder { background-color: #ffc107 !important; color: #000000 !important; }
-{% endstylesheet%}
+{% endstylesheet %}
