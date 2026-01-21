@@ -4201,9 +4201,3 @@ text-component {
 
   --badge-gap: 6px;
 }
-.product-badges__badge .badge-text {
-  display: inline-block;
-  transform: scaleX(2.25095);
-  transform-origin: center;
-}
-
