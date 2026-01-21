@@ -1,85 +1,83 @@
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
-  --badge-border-radius: {{ settings.badge_corner_radius }}px;
+    --badge-border-radius: {{ settings.badge_corner_radius }}px;
 
-  --badge-font-family: 'Reenie Beanie', cursive;
-  --badge-font-weight: 400;
-  --badge-text-transform: none;
+    --badge-font-family: 'Reenie Beanie', cursive;
+    --badge-font-weight: 400;
+    --badge-text-transform: none;
 
-  --badge-font-size: {{ settings.badge_font_size }}px;
-  --badge-font-size-mobile: {{ settings.badge_font_size_mobile }}px;
+    --badge-font-size: {{ settings.badge_font_size }}px;
+    --badge-font-size-mobile: {{ settings.badge_font_size_mobile }}px;
 
-  --badge-letter-spacing: -0.075em;
-  --badge-scale-x: 2.25095;
+    --badge-letter-spacing: -0.075em;
+    --badge-scale-x: 2.25095;
 
-  --badge-gap: {{ settings.badge_gap }}px;
-  --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
+    --badge-gap-desktop: {{ settings.badge_gap_desktop | default: 6 }}px;
+    --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
 
-  --badge-padding-x: {{ settings.badge_padding_x }}px;
-  --badge-padding-y: {{ settings.badge_padding_y }}px;
-  --badge-padding-x-mobile: {{ settings.badge_padding_x_mobile }}px;
-  --badge-padding-y-mobile: {{ settings.badge_padding_y_mobile }}px;
-"
+    --badge-padding-y: {{ settings.badge_padding_y | default: 6 }}px;
+    --badge-padding-x: {{ settings.badge_padding_x | default: 12 }}px;
+  "
 >
   {%- assign main_badge = '' -%}
   {%- assign state_badge = '' -%}
 
-  {%- comment -%} Badge principal (en haut) {%- endcomment -%}
+  {%- comment -%} ===== Badge principal (en haut) ===== {%- endcomment -%}
   {%- if product.tags contains 'soon' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-soon">
         <span class="badge-text">Soon</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'archive' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-archive">
         <span class="badge-text">Archivé</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_studio' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-studio">
         <span class="badge-text">Studio</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_made' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-made">
         <span class="badge-text">Made</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'owl_creative' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-creative">
         <span class="badge-text">Creative</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'preorder' -%}
     {%- capture main_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-preorder">
         <span class="badge-text">Précommande</span>
       </div>
     {%- endcapture -%}
   {%- endif -%}
 
-  {%- comment -%} Badge état produit (en dessous) {%- endcomment -%}
+  {%- comment -%} ===== Badge état produit (en dessous) ===== {%- endcomment -%}
   {%- if product.available == false -%}
     {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
+      <div class="product-badges__badge badge-pill badge--scheme color-{{ settings.badge_sold_out_color_scheme }}">
         <span class="badge-text">{{ 'content.product_badge_sold_out' | t }}</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.compare_at_price > product.price -%}
     {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
+      <div class="product-badges__badge badge-pill badge--scheme color-{{ settings.badge_sale_color_scheme }}">
         <span class="badge-text">{{ 'content.product_badge_sale' | t }}</span>
       </div>
     {%- endcapture -%}
   {%- elsif product.tags contains 'new' -%}
     {%- capture state_badge -%}
-      <div class="product-badges__badge badge-pill product-badges__badge--rectangle">
+      <div class="product-badges__badge badge-pill badge--custom-new">
         <span class="badge-text">New</span>
       </div>
     {%- endcapture -%}
@@ -99,11 +97,10 @@
   display:inline-flex;
   flex-direction:column;
 
-  /* customizer */
-  gap: var(--badge-gap);
+  gap: var(--badge-gap-desktop);
 
-  /* IMPORTANT : badges même largeur automatiquement (largeur = la plus grande des 2 lignes) */
-  align-items: stretch;
+  width:max-content;
+  align-items:flex-start;
 }
 
 /* Positions */
@@ -128,8 +125,8 @@
   text-align:center;
 
   border-radius: var(--badge-border-radius);
-  white-space: nowrap;
-  overflow: hidden;
+  white-space:nowrap;
+  overflow:hidden;
 
   font-family: var(--badge-font-family);
   font-weight: var(--badge-font-weight);
@@ -137,23 +134,41 @@
 
   font-size: var(--badge-font-size);
 
-  /* padding identique haut/bas */
-  padding: var(--badge-padding-y) var(--badge-padding-x);
+  /* padding identique pour TOUS (haut + bas) */
+  padding-inline: var(--badge-padding-x);
+  padding-block: var(--badge-padding-y);
 
-  /* même largeur entre eux */
+  /* fallback visible (important) */
+  background: #ffffff;
+  color: #000000;
+
   width: 100%;
 }
 
-/* Texte : même style partout + “fit” auto via JS */
+/* Texte identique */
 .product-badges__badge .badge-text{
   display:inline-block;
   white-space:nowrap;
   transform-origin:center;
   letter-spacing: var(--badge-letter-spacing);
-
-  /* scaleX de base * scale de fit (<=1) */
-  transform: scaleX(calc(var(--badge-scale-x) * var(--badge-fit-scale, 1)));
+  transform: scaleX(var(--badge-scale-x));
 }
+
+/* ✅ IMPORTANT : badges bas (Sale/Sold out) = utilisent les variables du color scheme */
+.product-badges__badge.badge--scheme{
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+/* ===== Tes couleurs custom (comme avant) ===== */
+/* (mets ici EXACTEMENT tes valeurs initiales si elles diffèrent) */
+.product-badges__badge.badge--custom-soon{ background:#7673BF; color:#000; }
+.product-badges__badge.badge--custom-archive{ background:#6c757d; color:#fff; }
+.product-badges__badge.badge--custom-studio{ background:#8f9090; color:#000; }
+.product-badges__badge.badge--custom-made{ background:#b87200; color:#7d4e24; }
+.product-badges__badge.badge--custom-creative{ background:#1b72b9; color:#fff; }
+.product-badges__badge.badge--custom-preorder{ background:#ffc107; color:#000; }
+.product-badges__badge.badge--custom-new{ background:#28a745; color:#fff; }
 
 /* Mobile */
 @media screen and (max-width: 749px){
@@ -162,81 +177,31 @@
   }
   .product-badges__badge{
     font-size: var(--badge-font-size-mobile);
-    padding: var(--badge-padding-y-mobile) var(--badge-padding-x-mobile);
   }
 }
-/* Padding badges – desktop */
-.product-badges__badge {
-  padding-inline: var(--badge-padding-x);
-  padding-block: var(--badge-padding-y);
-}
-@media screen and (max-width: 749px) {
-  .product-badges__badge {
-    padding-inline: var(--badge-padding-x-mobile);
-    padding-block: var(--badge-padding-y-mobile);
-  }
-}
-.badge--custom-made {
-  background-color: #b87200;
-  color: #7d4e24;
-}
-
-.badge--custom-studio {
-  background-color: #8f9090;
-  color: #000000;
-}
-
-.badge--custom-creative {
-  background-color: #1b72b9;
-  color: #ffffff;
-}
-
-.badge--custom-new {
-  background-color: #28a745;
-  color: #ffffff;
-}
-
-.badge--custom-archive {
-  background-color: #6c757d;
-  color: #ffffff;
-}
-
-.badge--custom-soon {
-  background-color: #7673BF;
-  color: #000000;
-}
-
-.badge--custom-preorder {
-  background-color: #ffc107;
-  color: #000000;
-}
-
 {% endstylesheet %}
 
 <script>
 (function () {
-  function fitBadgeText(badge) {
-    const text = badge.querySelector('.badge-text');
-    if (!text) return;
+  function setUniformWidthForGroup(group) {
+    const badges = Array.from(group.querySelectorAll('.product-badges__badge'));
+    if (!badges.length) return;
 
-    // reset
-    badge.style.removeProperty('--badge-fit-scale');
+    group.style.width = 'max-content';
 
-    // available space (inside badge)
-    const available = badge.clientWidth;
-    const needed = text.scrollWidth;
+    let max = 0;
+    badges.forEach(b => {
+      b.style.width = 'auto';
+      const w = b.getBoundingClientRect().width;
+      if (w > max) max = w;
+    });
 
-    if (!available || !needed) return;
-
-    // If text overflows, shrink it (never enlarge)
-    if (needed > available) {
-      const s = available / needed;
-      badge.style.setProperty('--badge-fit-scale', String(s));
-    }
+    badges.forEach(b => (b.style.width = '100%'));
+    group.style.width = Math.ceil(max) + 'px';
   }
 
   function run() {
-    document.querySelectorAll('.product-badges__badge').forEach(fitBadgeText);
+    document.querySelectorAll('.product-badges').forEach(setUniformWidthForGroup);
   }
 
   const rafRun = () => requestAnimationFrame(run);
