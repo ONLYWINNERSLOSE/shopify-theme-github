@@ -4116,14 +4116,15 @@ text-component {
   transform: none;
   box-shadow: none;
 }
-/* BADGES – taille du texte */
-.product-badges .product-badges__badge {
+/* FORCE la taille du texte des badges via les variables du snippet */
+.product-badges,
+.product-badges * {
   font-size: var(--badge-font-size, 12px) !important;
-  line-height: 1.1 !important;
 }
 
 @media screen and (max-width: 749px) {
-  .product-badges .product-badges__badge {
+  .product-badges,
+  .product-badges * {
     font-size: var(--badge-font-size-mobile, 11px) !important;
   }
 }
