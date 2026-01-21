@@ -16,8 +16,14 @@
   "
 >
   {% assign product_tags = product.tags | join: ',' %}
-
-  {% if product_tags contains 'archive' %}
+{% if product_tags contains 'soon' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-soon
+      "
+    >Soon</div>
+  {% elsif product_tags contains 'archive' %}
     <div
       class="
         product-badges__badge product-badges__badge--rectangle
@@ -52,13 +58,6 @@
         badge--custom-preorder
       "
     >Précommande</div>
-  {% elsif product_tags contains 'soon' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-soon
-      "
-    >Soon</div>
   {% elsif product.available == false %}
     <div
       class="
