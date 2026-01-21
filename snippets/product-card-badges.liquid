@@ -1,23 +1,14 @@
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
-  data-debug="desk:{{ settings.badge_font_size }} / mob:{{ settings.badge_font_size_mobile }}"
-
   style="
-    --badge-border-radius: {{ settings.badge_corner_radius }}px;
-
     --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
     --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight);
     --badge-text-transform: {{ settings.badge_text_transform }};
-
     --badge-font-size: {{ settings.badge_font_size }}px;
     --badge-font-size-mobile: {{ settings.badge_font_size_mobile }}px;
-
-    --badge-state-font-size: {{ settings.badge_state_font_size }}px;
-    --badge-state-font-size-mobile: {{ settings.badge_state_font_size_mobile }}px;
-
-    --badge-gap-mobile: {{ settings.badge_gap_mobile }}px;
   "
 >
+
   {%- assign main_badge = '' -%}
   {%- assign state_badge = '' -%}
 
