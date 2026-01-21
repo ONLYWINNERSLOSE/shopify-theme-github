@@ -4116,7 +4116,14 @@ text-component {
   transform: none;
   box-shadow: none;
 }
+/* BADGES – taille du texte */
 .product-badges .product-badges__badge {
-  font-size: var(--badge-font-size, 11px) !important;
+  font-size: var(--badge-font-size, 12px) !important;
   line-height: 1.1 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .product-badges .product-badges__badge {
+    font-size: var(--badge-font-size-mobile, 11px) !important;
+  }
 }
