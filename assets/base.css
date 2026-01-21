@@ -4115,4 +4115,28 @@ text-component {
   z-index: auto;
   transform: none;
   box-shadow: none;
+  /* =========================
+   BADGES – custom font sizes
+   ========================= */
+
+.product-badges .product-badges__badge {
+  font-size: var(--badge-font-size) !important;
+  line-height: 1.1 !important;
+}
+
+.product-badges .product-badges__badge.badge--state {
+  font-size: var(--badge-state-font-size) !important;
+  line-height: 1.1 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .product-badges .product-badges__badge {
+    font-size: var(--badge-font-size-mobile) !important;
+  }
+
+  .product-badges .product-badges__badge.badge--state {
+    font-size: var(--badge-state-font-size-mobile) !important;
+  }
+}
+
 }
