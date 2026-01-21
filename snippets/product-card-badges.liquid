@@ -1,90 +1,78 @@
-{% comment %}
-  Renders product badges for the product card.
-
-  @param {object} product - The product object.
-  @param {object} settings - The theme settings object.
-
-  @example
-  {% render 'product-card-badges', product: product, settings: settings %}
-{% endcomment %}
-
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
     --badge-border-radius: {{ settings.badge_corner_radius }}px;
-    --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
+    --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
+    --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight);
+    --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {% assign product_tags = product.tags | join: ',' %}
-{% if product_tags contains 'soon' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-soon
-      "
-    >Soon</div>
-  {% elsif product_tags contains 'archive' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-archive
-      "
-    >Archivé</div>
-    {% elsif product_tags contains 'owl_studio' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-studio
-      "
-    >Studio</div>
-    {% elsif product_tags contains 'owl_made' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-made
-      "
-    >Made</div>
-    {% elsif product_tags contains 'owl_creative' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-creative
-      "
-    >Creative</div>
-   {% elsif product_tags contains 'preorder' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-preorder
-      "
-    >Précommande</div>
-  {% elsif product.available == false %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        color-{{ settings.badge_sold_out_color_scheme }}
-      "
-    >
-      {{ 'content.product_badge_sold_out' | t }}
-    </div>
-  {% elsif product.compare_at_price > product.price %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        color-{{ settings.badge_sale_color_scheme }}
-      "
-    >
-      {{ 'content.product_badge_sale' | t }}
-    </div>
-  {% elsif product_tags contains 'new' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-new
-      "
-    >New</div>
-  {% endif %}
+  {%- assign main_badge = '' -%}
+  {%- assign state_badge = '' -%}
+
+  {%- comment -%} =========================
+     BADGE PRINCIPAL (TOP)
+     ========================= {%- endcomment -%}
+
+  {%- if product.tags contains 'soon' -%}
+    {%- capture main_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-soon">Soon</div>
+    {%- endcapture -%}
+
+  {%- elsif product.tags contains 'archive' -%}
+    {%- capture main_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-archive">Archivé</div>
+    {%- endcapture -%}
+
+  {%- elsif product.tags contains 'owl_studio' -%}
+    {%- capture main_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-studio">Studio</div>
+    {%- endcapture -%}
+
+  {%- elsif product.tags contains 'owl_made' -%}
+    {%- capture main_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-made">Made</div>
+    {%- endcapture -%}
+
+  {%- elsif product.tags contains 'owl_creative' -%}
+    {%- capture main_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-creative">Creative</div>
+    {%- endcapture -%}
+
+  {%- elsif product.tags contains 'preorder' -%}
+    {%- capture main_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-preorder">Précommande</div>
+    {%- endcapture -%}
+  {%- endif -%}
+
+  {%- comment -%} =========================
+     BADGE ÉTAT PRODUIT (BOTTOM)
+     ========================= {%- endcomment -%}
+
+  {%- if product.available == false -%}
+    {%- capture state_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--state">
+        {{ 'content.product_badge_sold_out' | t }}
+      </div>
+    {%- endcapture -%}
+
+  {%- elsif product.compare_at_price > product.price -%}
+    {%- capture state_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--state">
+        {{ 'content.product_badge_sale' | t }}
+      </div>
+    {%- endcapture -%}
+
+  {%- elsif product.tags contains 'new' -%}
+    {%- capture state_badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-new badge--state">New</div>
+    {%- endcapture -%}
+  {%- endif -%}
+
+  {{ main_badge }}
+  {{ state_badge }}
 </div>
+
 
 {% stylesheet %}
   .product-badges {
