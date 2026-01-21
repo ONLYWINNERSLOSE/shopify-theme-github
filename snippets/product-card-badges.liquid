@@ -12,152 +12,94 @@
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
     --badge-border-radius: {{ settings.badge_corner_radius }}px;
-    --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
+    --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
+    --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight);
+    --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {% assign product_tags = product.tags | join: ',' %}
-{% if product_tags contains 'soon' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-soon
-      "
-    >Soon</div>
-  {% elsif product_tags contains 'archive' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-archive
-      "
-    >Archivé</div>
-    {% elsif product_tags contains 'owl_studio' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-studio
-      "
-    >Studio</div>
-    {% elsif product_tags contains 'owl_made' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-made
-      "
-    >Made</div>
-    {% elsif product_tags contains 'owl_creative' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-creative
-      "
-    >Creative</div>
-   {% elsif product_tags contains 'preorder' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-preorder
-      "
-    >Précommande</div>
-  {% elsif product.available == false %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        color-{{ settings.badge_sold_out_color_scheme }}
-      "
-    >
-      {{ 'content.product_badge_sold_out' | t }}
-    </div>
-  {% elsif product.compare_at_price > product.price %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        color-{{ settings.badge_sale_color_scheme }}
-      "
-    >
-      {{ 'content.product_badge_sale' | t }}
-    </div>
-  {% elsif product_tags contains 'new' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-new
-      "
-    >New</div>
-  {% endif %}
+  {%- assign badges_html = '' -%}
+  {%- assign badges_count = 0 -%}
+  {%- assign badges_limit = 2 -%}
+
+  {%- comment -%} 1) Badges basés sur tags (prioritaires) {%- endcomment -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'soon' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-soon">Soon</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'archive' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-archive">Archivé</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'owl_studio' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-studio">Studio</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'owl_made' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-made">Made</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'owl_creative' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-creative">Creative</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'preorder' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-preorder">Précommande</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- comment -%} 2) Badges “état produit” (complètent si place dispo) {%- endcomment -%}
+
+  {%- if badges_count < badges_limit and product.available == false -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
+        {{ 'content.product_badge_sold_out' | t }}
+      </div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.compare_at_price > product.price -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
+        {{ 'content.product_badge_sale' | t }}
+      </div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if badges_count < badges_limit and product.tags contains 'new' -%}
+    {%- capture badge -%}
+      <div class="product-badges__badge product-badges__badge--rectangle badge--custom-new">New</div>
+    {%- endcapture -%}
+    {%- assign badges_html = badges_html | append: badge -%}
+    {%- assign badges_count = badges_count | plus: 1 -%}
+  {%- endif -%}
+
+  {{ badges_html }}
 </div>
-
-{% stylesheet %}
-  .product-badges {
-    --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
-
-    position: absolute;
-    z-index: var(--layer-flat);
-  }
-
-  .product-badges--bottom-left {
-    bottom: calc(var(--badge-inset) + var(--padding-block-start));
-    left: calc(var(--badge-inset) + var(--padding-inline-start));
-  }
-
-  .product-badges--top-left {
-    top: calc(var(--badge-inset) + var(--padding-block-start));
-    left: calc(var(--badge-inset) + var(--padding-inline-start));
-  }
-
-  .product-badges--top-right {
-    top: calc(var(--badge-inset) + var(--padding-block-start));
-    right: calc(var(--badge-inset) + var(--padding-inline-start));
-  }
-
-  .product-badges__badge {
-    --badge-font-size: var(--font-size--xs);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--color-foreground);
-    background: var(--color-background);
-    font-size: var(--badge-font-size);
-    font-family: var(--badge-font-family);
-    font-weight: var(--badge-font-weight);
-    text-transform: var(--badge-text-transform);
-    border-radius: var(--badge-border-radius);
-  }
-
-  .product-badges__badge--rectangle {
-    padding-block: var(--badge-rectangle-padding-block);
-    padding-inline: var(--badge-rectangle-padding-inline);
-  }
-
-  /* --- Styles pour vos badges personnalisés (avec !important pour forcer si besoin) --- */
-  .badge--custom-made {
-    background-color: #b87200 !important;
-    color: #7d4e24 !important;
-  }
-  .badge--custom-studio {
-    background-color: #8f9090 !important;
-    color: #000000 !important;
-  }
-  .badge--custom-creative {
-    background-color: #1b72b9 !important;
-    color: #fff !important;
-  }
-  .badge--custom-new {
-    background-color: #28a745 !important;
-    color: #fff !important;
-  }
-
-  .badge--custom-archive {
-    background-color: #6c757d !important;
-    color: #fff !important;
-  }
-  .badge--custom-soon {
-    background-color: #7673BF !important;
-    color: #000000 !important;
-  }
-  .badge--custom-preorder {
-    background-color: #ffc107 !important;
-    color: #000000 !important;
-  }
-{% endstylesheet %}
