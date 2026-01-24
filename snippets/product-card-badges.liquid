@@ -31,6 +31,13 @@
         badge--custom-preorder
       "
     >Précommande</div>
+    {% elsif product_tags contains 'soon' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-soon
+      "
+    >Soon</div>
     {% elsif product_tags contains 'owl_studio' %}
     <div
       class="
@@ -52,13 +59,6 @@
         badge--custom-creative
       "
     >Creative</div>
-  {% elsif product_tags contains 'soon' %}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        badge--custom-soon
-      "
-    >Soon</div>
   {% elsif product.available == false %}
     <div
       class="
