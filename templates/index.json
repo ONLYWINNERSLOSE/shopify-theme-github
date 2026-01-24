@@ -661,7 +661,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h6>Nos produits</h6>",
+                "text": "<h6>Tous les produits</h6>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
