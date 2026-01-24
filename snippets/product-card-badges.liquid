@@ -31,6 +31,27 @@
         badge--custom-preorder
       "
     >Précommande</div>
+    {% elsif product_tags contains 'owl_studio' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-preorder
+      "
+    >Studio</div>
+    {% elsif product_tags contains 'owl_made' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-preorder
+      "
+    >Made</div>
+    {% elsif product_tags contains 'owl_creative' %}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle
+        badge--custom-preorder
+      "
+    >Creative</div>
   {% elsif product_tags contains 'soon' %}
     <div
       class="
