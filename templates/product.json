@@ -417,11 +417,11 @@
               "name": "t:names.accordion",
               "settings": {
                 "icon": "caret",
-                "dividers": true,
+                "dividers": false,
                 "type_preset": "h6",
                 "inherit_color_scheme": true,
                 "color_scheme": "",
-                "border": "solid",
+                "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 0,
