@@ -354,7 +354,7 @@
         "vertical_alignment_flex_direction_column": "flex-start",
         "gap": 10,
         "section_width": "page-width",
-        "section_height": "custom",
+        "section_height": "small",
         "section_height_custom": 1,
         "color_scheme": "scheme-1",
         "toggle_overlay": true,
