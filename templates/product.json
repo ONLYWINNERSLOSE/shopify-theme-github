@@ -12,10 +12,6 @@
     "main": {
       "type": "product-information",
       "blocks": {
-        "mageplaza_size_chart_mp_inline_button_Wi9grN": {
-          "type": "shopify://apps/mp-size-chart-size-guide/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
-          "settings": {}
-        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -246,13 +242,13 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "mageplaza_size_chart_mp_inline_button_XeB87Q": {
+                "mp_size_chart_size_guide_mp_inline_button_HyEY3g": {
                   "type": "shopify://apps/mp-size-chart-size-guide/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
                   "settings": {}
                 }
               },
               "block_order": [
-                "mageplaza_size_chart_mp_inline_button_XeB87Q"
+                "mp_size_chart_size_guide_mp_inline_button_HyEY3g"
               ]
             },
             "variant_picker": {
@@ -568,9 +564,6 @@
           ]
         }
       },
-      "block_order": [
-        "mageplaza_size_chart_mp_inline_button_Wi9grN"
-      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
