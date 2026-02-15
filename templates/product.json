@@ -216,19 +216,6 @@
               },
               "blocks": {}
             },
-            "product_inventory_k8fDgV": {
-              "type": "product-inventory",
-              "name": "t:names.product_inventory",
-              "settings": {
-                "inventory_threshold": 5,
-                "show_inventory_quantity": true,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "group_kNeUtN": {
               "type": "group",
               "name": "Guide des tailles",
@@ -570,7 +557,6 @@
           "block_order": [
             "group",
             "variant_picker",
-            "product_inventory_k8fDgV",
             "group_kNeUtN",
             "buy_buttons",
             "group_EekJGx",
