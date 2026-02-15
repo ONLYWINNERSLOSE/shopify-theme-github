@@ -584,7 +584,7 @@
       },
       "settings": {
         "layout_type": "grid",
-        "product_card_size": "large",
+        "product_card_size": "medium",
         "mobile_product_card_size": "small",
         "product_grid_width": "centered",
         "full_width_on_mobile": false,
@@ -593,8 +593,8 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0,
         "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 10,
+        "padding-block-end": 20
       }
     }
   },
