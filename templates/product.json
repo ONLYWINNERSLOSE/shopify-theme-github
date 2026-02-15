@@ -203,15 +203,41 @@
                 "group_8B3NLh"
               ]
             },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": true,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_inventory_k8fDgV": {
+              "type": "product-inventory",
+              "name": "t:names.product_inventory",
+              "settings": {
+                "inventory_threshold": 5,
+                "show_inventory_quantity": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "group_kNeUtN": {
               "type": "group",
               "name": "Guide des tailles",
               "settings": {
                 "link": "",
                 "open_in_new_tab": false,
-                "content_direction": "column",
+                "content_direction": "row",
                 "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
+                "horizontal_alignment": "space-between",
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
@@ -242,40 +268,28 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "product_inventory_jLnEF7": {
+                  "type": "product-inventory",
+                  "name": "t:names.product_inventory",
+                  "settings": {
+                    "inventory_threshold": 10,
+                    "show_inventory_quantity": true,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "mp_size_chart_size_guide_mp_inline_button_HyEY3g": {
                   "type": "shopify://apps/mp-size-chart-size-guide/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
                   "settings": {}
                 }
               },
               "block_order": [
+                "product_inventory_jLnEF7",
                 "mp_size_chart_size_guide_mp_inline_button_HyEY3g"
               ]
-            },
-            "variant_picker": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": true,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_inventory_k8fDgV": {
-              "type": "product-inventory",
-              "name": "t:names.product_inventory",
-              "settings": {
-                "inventory_threshold": 5,
-                "show_inventory_quantity": true,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
             },
             "buy_buttons": {
               "type": "buy-buttons",
@@ -555,9 +569,9 @@
           },
           "block_order": [
             "group",
-            "group_kNeUtN",
             "variant_picker",
             "product_inventory_k8fDgV",
+            "group_kNeUtN",
             "buy_buttons",
             "group_EekJGx",
             "accordion_B4yFm8"
