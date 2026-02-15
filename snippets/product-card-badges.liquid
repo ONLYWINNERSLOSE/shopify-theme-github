@@ -38,7 +38,7 @@
         badge--custom-soon
       "
     >Soon</div>
-    <!-- Ceci est un commentaire HTML -->
+    {% comment %}
     {% elsif product_tags contains 'owl_studio' %}
     <div
       class="
@@ -60,7 +60,7 @@
         badge--custom-creative
       "
     >Creative</div>
-    <!-- <p>Ce paragraphe est ignoré</p> -->
+    {% endcomment %}
   {% elsif product.available == false %}
     <div
       class="
