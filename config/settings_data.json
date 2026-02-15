@@ -69,6 +69,7 @@
     "quick_add": false,
     "mobile_quick_add": true,
     "product_card_carousel": false,
+    "empty_state_collection": "",
     "variant_swatch_width": 18,
     "variant_swatch_height": 18,
     "variant_swatch_radius": 0,
