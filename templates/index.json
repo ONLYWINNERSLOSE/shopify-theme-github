@@ -12,6 +12,47 @@
     "section_aVy9D9": {
       "type": "section",
       "blocks": {
+        "group_AjDRPQ": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "link": "",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "space-between",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/Cement_T-shirt_Black_washed_dos_a75aa330-4e31-42cd-9ea9-e109094c379a.jpg",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "group_b9WfRr": {
           "type": "group",
           "settings": {
@@ -35,7 +76,7 @@
             "color_scheme": "scheme-5",
             "background_media": "image",
             "video_position": "cover",
-            "background_image": "shopify://shop_images/DSC09041.jpg",
+            "background_image": "shopify://shop_images/Umbra_Sweater_Gris_etiquette.jpg",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
@@ -50,65 +91,7 @@
             "padding-inline-start": 40,
             "padding-inline-end": 40
           },
-          "blocks": {
-            "spacer_pzDfex": {
-              "type": "spacer",
-              "settings": {
-                "size": "pixel",
-                "percent_size": 100,
-                "pixel_size": 16,
-                "custom_mobile_size": false,
-                "size_mobile": "percent",
-                "percent_size_mobile": 100,
-                "pixel_size_mobile": 120
-              },
-              "blocks": {}
-            },
-            "text_prxpif": {
-              "type": "text",
-              "settings": {
-                "text": "<h3><a href=\"/collections/the-paw\" title=\"THE PAW\">Dernier Drop</a></h3>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": true,
-                "background_color": "#000000",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_VnzXUV": {
-              "type": "button",
-              "settings": {
-                "label": "Découvrez \"THE PAW\"",
-                "link": "shopify://collections/the-paw",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "spacer_pzDfex",
-            "text_prxpif",
-            "button_VnzXUV"
-          ]
+          "blocks": {}
         },
         "group_gUPmD6": {
           "type": "group",
@@ -133,7 +116,7 @@
             "color_scheme": "scheme-5",
             "background_media": "image",
             "video_position": "cover",
-            "background_image": "shopify://shop_images/Remerciement.jpg",
+            "background_image": "shopify://shop_images/Cement_T-shirt_Black_washed_etiquette.jpg",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
@@ -148,68 +131,11 @@
             "padding-inline-start": 40,
             "padding-inline-end": 40
           },
-          "blocks": {
-            "spacer_GqxBc8": {
-              "type": "spacer",
-              "settings": {
-                "size": "pixel",
-                "percent_size": 100,
-                "pixel_size": 16,
-                "custom_mobile_size": false,
-                "size_mobile": "percent",
-                "percent_size_mobile": 100,
-                "pixel_size_mobile": 120
-              },
-              "blocks": {}
-            },
-            "text_xn4eqz": {
-              "type": "text",
-              "settings": {
-                "text": "<h3><a href=\"/collections/beta-t-shirt-noir-blanc\" title=\"βeta\">Dernière chance</a></h3>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": true,
-                "background_color": "#000000",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_LwGfBb": {
-              "type": "button",
-              "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/beta-t-shirt-noir-blanc",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "spacer_GqxBc8",
-            "text_xn4eqz",
-            "button_LwGfBb"
-          ]
+          "blocks": {}
         }
       },
       "block_order": [
+        "group_AjDRPQ",
         "group_b9WfRr",
         "group_gUPmD6"
       ],
