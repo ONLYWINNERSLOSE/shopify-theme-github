@@ -430,7 +430,7 @@
               "settings": {
                 "icon": "caret",
                 "dividers": false,
-                "type_preset": "h6",
+                "type_preset": "h5",
                 "inherit_color_scheme": true,
                 "color_scheme": "",
                 "border": "none",
