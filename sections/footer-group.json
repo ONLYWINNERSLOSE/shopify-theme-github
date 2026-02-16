@@ -255,7 +255,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>FAILURES DEFINE SUCESS.</p>",
+                "text": "<p>FAILURES DEFINE SUCCESS.</p>",
                 "width": "100%",
                 "max_width": "narrow",
                 "alignment": "right",
