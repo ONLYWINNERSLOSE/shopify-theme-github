@@ -571,7 +571,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Découvrez toutes nos confections depuis la création de OWL.</p>",
+                "text": "<p>Retrouvez tous les produits développés jusqu'à présent.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
