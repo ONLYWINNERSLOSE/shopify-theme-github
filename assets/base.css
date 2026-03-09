@@ -4138,5 +4138,14 @@ text-component {
     font-size: var(--badge-state-font-size-mobile) !important;
   }
 }
+/*Background footer (pour que l'image soit sur toute la page)*/
+body.template-password {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+body.template-password footer {
+  background: transparent !important;
+}
 }
