@@ -4138,21 +4138,5 @@ text-component {
     font-size: var(--badge-state-font-size-mobile) !important;
   }
 }
-body.password-page-custom {
-  background-image: url("https://cdn.shopify.com/s/files/1/0728/0236/9802/files/IMG_1719.jpg?v=1773091730");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-}
 
-body.password-page-custom .content-for-layout,
-body.password-page-custom .password-enter {
-  background: transparent !important;
-}
-
-body.password-page-custom .password-enter {
-  position: relative;
-  z-index: 2;
-}
 }
