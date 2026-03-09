@@ -404,7 +404,7 @@
       },
       "scheme-a087b02f-0c9d-4b79-8f67-708db9cf17b1": {
         "settings": {
-          "background": "#000000",
+          "background": "#00000000",
           "foreground_heading": "#686a6d",
           "foreground": "#ff0000",
           "primary": "#6a686d",
