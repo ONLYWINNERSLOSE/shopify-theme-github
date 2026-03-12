@@ -272,6 +272,7 @@
                 "text_yQeipU": {
                   "type": "text",
                   "name": "t:names.text",
+                  "disabled": true,
                   "settings": {
                     "text": "<p>Nombre de pièces : {{ closest.collection.metafields.custom.nombre_de_piece.value }}</p>",
                     "width": "100%",
