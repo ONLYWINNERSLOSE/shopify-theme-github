@@ -4140,3 +4140,6 @@ text-component {
 }
 
 }
+.password-footer {
+  background: transparent !important;
+}
