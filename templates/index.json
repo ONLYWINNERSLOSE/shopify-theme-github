@@ -94,7 +94,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Notre dernière collection</p>",
+                    "text": "<p>Nouvelle collection</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
