@@ -4140,3 +4140,25 @@ text-component {
 }
 
 }
+html, body {
+  height: 100%;
+}
+
+.password,
+.template-password {
+  min-height: 100vh;
+  background-image: url('https://cdn.shopify.com/s/files/1/0728/0236/9802/files/IMG_1719.jpg?v=1773091730');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.password-main,
+.password-footer,
+footer {
+  background: transparent !important;
+}
+
+.template-password body {
+  min-height: 100vh;
+}
