@@ -678,7 +678,7 @@
               "name": "Image avec texte",
               "settings": {
                 "image": "shopify://shop_images/Cement_t-shirt_profil_proche.jpg",
-                "image_link": "shopify://products/cement-t-shirt-black-washed",
+                "image_link": "shopify://products/cement-t-shirt-faded-noir",
                 "border_radius": 0,
                 "desktop_width_percent": 100,
                 "overlay_color": "#000000",
