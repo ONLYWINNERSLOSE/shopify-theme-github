@@ -11,6 +11,30 @@
   "sections": {
     "media_desktop_mobile_K79HEc": {
       "type": "media-desktop-mobile",
+      "blocks": {
+        "subheading_afhX6H": {
+          "type": "subheading",
+          "settings": {
+            "text": "Nouvelle collection",
+            "font_size_desktop": 16,
+            "font_size_mobile": 16,
+            "block_color": ""
+          }
+        },
+        "heading_7mNfdT": {
+          "type": "heading",
+          "settings": {
+            "text": "THE EDGE OF FALLING",
+            "font_size_desktop": 26,
+            "font_size_mobile": 26,
+            "block_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_afhX6H",
+        "heading_7mNfdT"
+      ],
       "name": "Média Desktop / Mobile",
       "settings": {
         "media_type_desktop": "video",
@@ -21,17 +45,13 @@
         "video_url_mobile": "https://cdn.shopify.com/videos/c/o/v/043c2fd101b34e329adaeb917af1d80c.mp4",
         "height_type_mobile": "fullscreen",
         "height_mobile": 400,
-        "overlay_title": "Nouvelle collection",
-        "title_size": 20,
-        "title_size_mobile": 28,
-        "overlay_subtitle": "",
-        "subtitle_size": 24,
-        "subtitle_size_mobile": 18,
-        "text_color": "#ffffff",
         "text_vertical_align": "center",
-        "text_horizontal_align": "center",
+        "text_horizontal_align": "flex-start",
         "text_align": "center",
-        "link_url": "",
+        "text_color": "#ffffff",
+        "overlay_padding": 20,
+        "blocks_gap": 0,
+        "link_url": "shopify://collections/the-edge-of-falling",
         "open_new_tab": false
       }
     },
