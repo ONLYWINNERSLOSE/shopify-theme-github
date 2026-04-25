@@ -23,7 +23,7 @@
             "underline": false,
             "uppercase": false,
             "letter_spacing": 0,
-            "margin_bottom": 0,
+            "margin_bottom": -7,
             "block_color": ""
           }
         },
@@ -32,7 +32,7 @@
           "settings": {
             "text": "THE EDGE OF FALLING",
             "font_size_desktop": 24,
-            "font_size_mobile": 26,
+            "font_size_mobile": 24,
             "bold": true,
             "italic": false,
             "underline": false,
@@ -258,6 +258,7 @@
       "block_order": [
         "group_rrUkGX"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Image avec texte",
       "settings": {
