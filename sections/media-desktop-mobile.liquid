@@ -7,9 +7,15 @@
     width: 100%;
     overflow: hidden;
   }
+  #section-{{ section.id }} a.media-link {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
   #section-{{ section.id }} .media-wrap {
     width: 100%;
     display: block;
+    position: relative;
   }
   #section-{{ section.id }} .media-wrap img,
   #section-{{ section.id }} .media-wrap video {
@@ -18,18 +24,61 @@
     object-fit: cover;
     display: block;
   }
+
+  /* Hauteur desktop */
+  {% if section.settings.height_type_desktop == 'fullscreen' %}
+  #section-{{ section.id }} .media-desktop {
+    height: 100vh;
+  }
+  {% else %}
   #section-{{ section.id }} .media-desktop {
     height: {{ section.settings.height_desktop }}px;
   }
+  {% endif %}
+
+  /* Hauteur mobile */
+  {% if section.settings.height_type_mobile == 'fullscreen' %}
+  #section-{{ section.id }} .media-mobile {
+    height: 100vh;
+  }
+  {% else %}
   #section-{{ section.id }} .media-mobile {
     height: {{ section.settings.height_mobile }}px;
+  }
+  {% endif %}
+
+  #section-{{ section.id }} .media-mobile {
     display: none;
   }
-  #section-{{ section.id }} a {
-    display: block;
-    width: 100%;
-    height: 100%;
+
+  /* Overlay texte */
+  #section-{{ section.id }} .media-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ section.settings.text_vertical_align }};
+    align-items: {{ section.settings.text_horizontal_align }};
+    text-align: {{ section.settings.text_align }};
+    padding: 40px;
+    box-sizing: border-box;
+    pointer-events: none;
   }
+  #section-{{ section.id }} .media-overlay .overlay-title {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: bold;
+    margin: 0 0 12px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  #section-{{ section.id }} .media-overlay .overlay-subtitle {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.subtitle_size }}px;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
   @media (max-width: 767px) {
     #section-{{ section.id }} .media-desktop {
       display: none;
@@ -37,12 +86,20 @@
     #section-{{ section.id }} .media-mobile {
       display: block;
     }
+    #section-{{ section.id }} .media-overlay .overlay-title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+    #section-{{ section.id }} .media-overlay .overlay-subtitle {
+      font-size: {{ section.settings.subtitle_size_mobile }}px;
+    }
   }
 </style>
 
 <div id="section-{{ section.id }}">
   {% if link_url != blank %}
-    <a href="{{ link_url }}"{% if open_new_tab %} target="_blank" rel="noopener"{% endif %}>
+    <a class="media-link" href="{{ link_url }}"{% if open_new_tab %} target="_blank" rel="noopener"{% endif %}>
+  {% else %}
+    <div class="media-link">
   {% endif %}
 
   {%- comment -%} DESKTOP {%- endcomment -%}
@@ -57,6 +114,18 @@
           <source src="{{ section.settings.video_url_desktop }}" type="video/mp4">
         </video>
       {% endif %}
+    {% endif %}
+
+    {%- comment -%} OVERLAY TEXTE {%- endcomment -%}
+    {% if section.settings.overlay_title != blank or section.settings.overlay_subtitle != blank %}
+      <div class="media-overlay">
+        {% if section.settings.overlay_title != blank %}
+          <p class="overlay-title">{{ section.settings.overlay_title }}</p>
+        {% endif %}
+        {% if section.settings.overlay_subtitle != blank %}
+          <p class="overlay-subtitle">{{ section.settings.overlay_subtitle }}</p>
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 
@@ -73,10 +142,24 @@
         </video>
       {% endif %}
     {% endif %}
+
+    {%- comment -%} OVERLAY TEXTE (même texte sur mobile) {%- endcomment -%}
+    {% if section.settings.overlay_title != blank or section.settings.overlay_subtitle != blank %}
+      <div class="media-overlay">
+        {% if section.settings.overlay_title != blank %}
+          <p class="overlay-title">{{ section.settings.overlay_title }}</p>
+        {% endif %}
+        {% if section.settings.overlay_subtitle != blank %}
+          <p class="overlay-subtitle">{{ section.settings.overlay_subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 
   {% if link_url != blank %}
     </a>
+  {% else %}
+    </div>
   {% endif %}
 </div>
 
@@ -110,9 +193,19 @@
       "placeholder": "https://..."
     },
     {
+      "type": "select",
+      "id": "height_type_desktop",
+      "label": "Hauteur desktop",
+      "options": [
+        { "value": "custom", "label": "Personnalisée (px)" },
+        { "value": "fullscreen", "label": "Plein écran (100vh)" }
+      ],
+      "default": "custom"
+    },
+    {
       "type": "range",
       "id": "height_desktop",
-      "label": "Hauteur desktop (px)",
+      "label": "Hauteur desktop personnalisée (px)",
       "min": 200,
       "max": 1000,
       "step": 10,
@@ -144,13 +237,114 @@
       "placeholder": "https://..."
     },
     {
+      "type": "select",
+      "id": "height_type_mobile",
+      "label": "Hauteur mobile",
+      "options": [
+        { "value": "custom", "label": "Personnalisée (px)" },
+        { "value": "fullscreen", "label": "Plein écran (100vh)" }
+      ],
+      "default": "custom"
+    },
+    {
       "type": "range",
       "id": "height_mobile",
-      "label": "Hauteur mobile (px)",
+      "label": "Hauteur mobile personnalisée (px)",
       "min": 100,
-      "step": 10,
       "max": 800,
+      "step": 10,
       "default": 400
+    },
+    {
+      "type": "header",
+      "content": "✍️ Texte superposé"
+    },
+    {
+      "type": "text",
+      "id": "overlay_title",
+      "label": "Titre",
+      "placeholder": "Mon titre..."
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Taille du titre (desktop, px)",
+      "min": 16,
+      "max": 100,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Taille du titre (mobile, px)",
+      "min": 14,
+      "max": 60,
+      "step": 2,
+      "default": 28
+    },
+    {
+      "type": "text",
+      "id": "overlay_subtitle",
+      "label": "Sous-titre",
+      "placeholder": "Mon sous-titre..."
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Taille du sous-titre (desktop, px)",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "label": "Taille du sous-titre (mobile, px)",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "text_vertical_align",
+      "label": "Position verticale du texte",
+      "options": [
+        { "value": "flex-start", "label": "Haut" },
+        { "value": "center", "label": "Centre" },
+        { "value": "flex-end", "label": "Bas" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_horizontal_align",
+      "label": "Position horizontale du texte",
+      "options": [
+        { "value": "flex-start", "label": "Gauche" },
+        { "value": "center", "label": "Centre" },
+        { "value": "flex-end", "label": "Droite" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alignement du texte",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
