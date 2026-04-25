@@ -52,7 +52,7 @@
     padding: {{ section.settings.overlay_padding }}px;
     box-sizing: border-box;
     pointer-events: none;
-    gap: {{ section.settings.blocks_gap }}px;
+    gap: 0;
   }
 
   #section-{{ section.id }} .overlay-block {
@@ -62,7 +62,6 @@
 
   #section-{{ section.id }} .overlay-block.type-heading {
     font-family: var(--font-heading-family);
-    font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     text-transform: var(--font-heading-text-transform, none);
     letter-spacing: var(--font-heading-letter-spacing, normal);
@@ -71,7 +70,6 @@
 
   #section-{{ section.id }} .overlay-block.type-subheading {
     font-family: var(--font-heading-family);
-    font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     opacity: 0.85;
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -79,7 +77,6 @@
 
   #section-{{ section.id }} .overlay-block.type-text {
     font-family: var(--font-body-family);
-    font-weight: var(--font-body-weight);
     font-style: var(--font-body-style);
     text-shadow: 0 1px 6px rgba(0,0,0,0.25);
   }
@@ -96,6 +93,7 @@
     assign font_size_desktop = block.settings.font_size_desktop
     assign font_size_mobile = block.settings.font_size_mobile
     assign block_color = block.settings.block_color
+    assign margin_bottom = block.settings.margin_bottom
 
     assign fw = 'inherit'
     if block.settings.bold
@@ -128,6 +126,7 @@
     assign block_style = block_style | append: 'text-decoration:' | append: td | append: ';'
     assign block_style = block_style | append: 'text-transform:' | append: tt | append: ';'
     assign block_style = block_style | append: 'letter-spacing:' | append: ls | append: ';'
+    assign block_style = block_style | append: 'margin-bottom:' | append: margin_bottom | append: 'px;'
 
     if block_color != blank
       assign block_style = block_style | append: 'color:' | append: block_color | append: ';'
@@ -268,6 +267,15 @@
           "default": 0
         },
         {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Espace après ce bloc (px)",
+          "min": -20,
+          "max": 80,
+          "step": 1,
+          "default": 8
+        },
+        {
           "type": "color",
           "id": "block_color",
           "label": "Couleur (laisse vide pour hériter)"
@@ -340,6 +348,15 @@
           "default": 0
         },
         {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Espace après ce bloc (px)",
+          "min": -20,
+          "max": 80,
+          "step": 1,
+          "default": 8
+        },
+        {
           "type": "color",
           "id": "block_color",
           "label": "Couleur (laisse vide pour hériter)"
@@ -410,6 +427,15 @@
           "max": 20,
           "step": 1,
           "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "label": "Espace après ce bloc (px)",
+          "min": -20,
+          "max": 80,
+          "step": 1,
+          "default": 8
         },
         {
           "type": "color",
@@ -559,15 +585,6 @@
       "max": 120,
       "step": 4,
       "default": 40
-    },
-    {
-      "type": "range",
-      "id": "blocks_gap",
-      "label": "Espacement entre les blocs (px)",
-      "min": 0,
-      "max": 60,
-      "step": 2,
-      "default": 12
     },
     {
       "type": "header",
