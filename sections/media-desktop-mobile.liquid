@@ -96,10 +96,43 @@
     assign font_size_desktop = block.settings.font_size_desktop
     assign font_size_mobile = block.settings.font_size_mobile
     assign block_color = block.settings.block_color
+
+    assign fw = 'inherit'
+    if block.settings.bold
+      assign fw = 'bold'
+    endif
+
+    assign fs = 'normal'
+    if block.settings.italic
+      assign fs = 'italic'
+    endif
+
+    assign td = 'none'
+    if block.settings.underline
+      assign td = 'underline'
+    endif
+
+    assign tt = 'none'
+    if block.settings.uppercase
+      assign tt = 'uppercase'
+    endif
+
+    assign ls = 'normal'
+    if block.settings.letter_spacing > 0
+      assign ls = block.settings.letter_spacing | append: 'px'
+    endif
+
     assign block_style = 'font-size:' | append: font_size_desktop | append: 'px;'
+    assign block_style = block_style | append: 'font-weight:' | append: fw | append: ';'
+    assign block_style = block_style | append: 'font-style:' | append: fs | append: ';'
+    assign block_style = block_style | append: 'text-decoration:' | append: td | append: ';'
+    assign block_style = block_style | append: 'text-transform:' | append: tt | append: ';'
+    assign block_style = block_style | append: 'letter-spacing:' | append: ls | append: ';'
+
     if block_color != blank
       assign block_style = block_style | append: 'color:' | append: block_color | append: ';'
     endif
+
     assign mobile_style_tag = '<style>@media(max-width:767px){#section-' | append: section.id | append: ' [data-block="' | append: block.id | append: '"]{font-size:' | append: font_size_mobile | append: 'px!important;}}</style>'
 
     if block.type == 'heading'
@@ -198,6 +231,43 @@
           "default": 32
         },
         {
+          "type": "header",
+          "content": "Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "bold",
+          "label": "Gras",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "italic",
+          "label": "Italique",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "underline",
+          "label": "Souligné",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase",
+          "label": "Majuscules",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "label": "Espacement des lettres (px)",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "default": 0
+        },
+        {
           "type": "color",
           "id": "block_color",
           "label": "Couleur (laisse vide pour hériter)"
@@ -233,6 +303,43 @@
           "default": 20
         },
         {
+          "type": "header",
+          "content": "Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "bold",
+          "label": "Gras",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "italic",
+          "label": "Italique",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "underline",
+          "label": "Souligné",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase",
+          "label": "Majuscules",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "label": "Espacement des lettres (px)",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "default": 0
+        },
+        {
           "type": "color",
           "id": "block_color",
           "label": "Couleur (laisse vide pour hériter)"
@@ -266,6 +373,43 @@
           "max": 36,
           "step": 1,
           "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "bold",
+          "label": "Gras",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "italic",
+          "label": "Italique",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "underline",
+          "label": "Souligné",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase",
+          "label": "Majuscules",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "label": "Espacement des lettres (px)",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "default": 0
         },
         {
           "type": "color",
