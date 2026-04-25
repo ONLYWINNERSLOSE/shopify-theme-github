@@ -1,0 +1,177 @@
+{% assign link_url = section.settings.link_url %}
+{% assign open_new_tab = section.settings.open_new_tab %}
+
+<style>
+  #section-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  #section-{{ section.id }} .media-wrap {
+    width: 100%;
+    display: block;
+  }
+  #section-{{ section.id }} .media-wrap img,
+  #section-{{ section.id }} .media-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  #section-{{ section.id }} .media-desktop {
+    height: {{ section.settings.height_desktop }}px;
+  }
+  #section-{{ section.id }} .media-mobile {
+    height: {{ section.settings.height_mobile }}px;
+    display: none;
+  }
+  #section-{{ section.id }} a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }} .media-desktop {
+      display: none;
+    }
+    #section-{{ section.id }} .media-mobile {
+      display: block;
+    }
+  }
+</style>
+
+<div id="section-{{ section.id }}">
+  {% if link_url != blank %}
+    <a href="{{ link_url }}"{% if open_new_tab %} target="_blank" rel="noopener"{% endif %}>
+  {% endif %}
+
+  {%- comment -%} DESKTOP {%- endcomment -%}
+  <div class="media-wrap media-desktop">
+    {% if section.settings.media_type_desktop == 'image' %}
+      {% if section.settings.image_desktop != blank %}
+        {{ section.settings.image_desktop | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.image_desktop.alt }}
+      {% endif %}
+    {% elsif section.settings.media_type_desktop == 'video' %}
+      {% if section.settings.video_url_desktop != blank %}
+        <video autoplay muted loop playsinline>
+          <source src="{{ section.settings.video_url_desktop }}" type="video/mp4">
+        </video>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {%- comment -%} MOBILE {%- endcomment -%}
+  <div class="media-wrap media-mobile">
+    {% if section.settings.media_type_mobile == 'image' %}
+      {% if section.settings.image_mobile != blank %}
+        {{ section.settings.image_mobile | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.image_mobile.alt }}
+      {% endif %}
+    {% elsif section.settings.media_type_mobile == 'video' %}
+      {% if section.settings.video_url_mobile != blank %}
+        <video autoplay muted loop playsinline>
+          <source src="{{ section.settings.video_url_mobile }}" type="video/mp4">
+        </video>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {% if link_url != blank %}
+    </a>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Média Desktop / Mobile",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🖥️ Desktop"
+    },
+    {
+      "type": "select",
+      "id": "media_type_desktop",
+      "label": "Type de média (desktop)",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Vidéo" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Image desktop"
+    },
+    {
+      "type": "text",
+      "id": "video_url_desktop",
+      "label": "URL vidéo desktop (MP4)",
+      "placeholder": "https://..."
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Hauteur desktop (px)",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile"
+    },
+    {
+      "type": "select",
+      "id": "media_type_mobile",
+      "label": "Type de média (mobile)",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Vidéo" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "text",
+      "id": "video_url_mobile",
+      "label": "URL vidéo mobile (MP4)",
+      "placeholder": "https://..."
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Hauteur mobile (px)",
+      "min": 100,
+      "step": 10,
+      "max": 800,
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "🔗 Lien"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "URL du lien (optionnel)"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_new_tab",
+      "label": "Ouvrir dans un nouvel onglet",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Média Desktop / Mobile"
+    }
+  ]
+}
+{% endschema %}
