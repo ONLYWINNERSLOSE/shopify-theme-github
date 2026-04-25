@@ -17,7 +17,7 @@
           "settings": {
             "text": "Nouvelle collection",
             "font_size_desktop": 16,
-            "font_size_mobile": 16,
+            "font_size_mobile": 12,
             "bold": false,
             "italic": false,
             "underline": false,
@@ -32,7 +32,7 @@
           "settings": {
             "text": "THE EDGE OF FALLING",
             "font_size_desktop": 24,
-            "font_size_mobile": 24,
+            "font_size_mobile": 18,
             "bold": true,
             "italic": false,
             "underline": false,
