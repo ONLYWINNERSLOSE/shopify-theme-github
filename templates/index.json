@@ -9,6 +9,32 @@
  */
 {
   "sections": {
+    "media_desktop_mobile_K79HEc": {
+      "type": "media-desktop-mobile",
+      "name": "Média Desktop / Mobile",
+      "settings": {
+        "media_type_desktop": "video",
+        "video_url_desktop": "https://cdn.shopify.com/videos/c/o/v/043c2fd101b34e329adaeb917af1d80c.mp4",
+        "height_type_desktop": "fullscreen",
+        "height_desktop": 600,
+        "media_type_mobile": "video",
+        "video_url_mobile": "",
+        "height_type_mobile": "custom",
+        "height_mobile": 400,
+        "overlay_title": "",
+        "title_size": 48,
+        "title_size_mobile": 28,
+        "overlay_subtitle": "",
+        "subtitle_size": 24,
+        "subtitle_size_mobile": 18,
+        "text_color": "#ffffff",
+        "text_vertical_align": "center",
+        "text_horizontal_align": "center",
+        "text_align": "center",
+        "link_url": "",
+        "open_new_tab": false
+      }
+    },
     "blocks_HwJLyy": {
       "type": "_blocks",
       "blocks": {
@@ -1111,6 +1137,7 @@
     }
   },
   "order": [
+    "media_desktop_mobile_K79HEc",
     "blocks_HwJLyy",
     "product_list_CDw6Nm",
     "section_6bQzba",
