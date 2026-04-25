@@ -7,7 +7,8 @@
     width: 100%;
     overflow: hidden;
   }
-  #section-{{ section.id }} a.media-link {
+  #section-{{ section.id }} a.media-link,
+  #section-{{ section.id }} div.media-link {
     display: block;
     position: relative;
     width: 100%;
@@ -25,33 +26,20 @@
     display: block;
   }
 
-  /* Hauteur desktop */
   {% if section.settings.height_type_desktop == 'fullscreen' %}
-  #section-{{ section.id }} .media-desktop {
-    height: 100vh;
-  }
+  #section-{{ section.id }} .media-desktop { height: 100vh; }
   {% else %}
-  #section-{{ section.id }} .media-desktop {
-    height: {{ section.settings.height_desktop }}px;
-  }
+  #section-{{ section.id }} .media-desktop { height: {{ section.settings.height_desktop }}px; }
   {% endif %}
 
-  /* Hauteur mobile */
   {% if section.settings.height_type_mobile == 'fullscreen' %}
-  #section-{{ section.id }} .media-mobile {
-    height: 100vh;
-  }
+  #section-{{ section.id }} .media-mobile { height: 100vh; }
   {% else %}
-  #section-{{ section.id }} .media-mobile {
-    height: {{ section.settings.height_mobile }}px;
-  }
+  #section-{{ section.id }} .media-mobile { height: {{ section.settings.height_mobile }}px; }
   {% endif %}
 
-  #section-{{ section.id }} .media-mobile {
-    display: none;
-  }
+  #section-{{ section.id }} .media-mobile { display: none; }
 
-  /* Overlay texte */
   #section-{{ section.id }} .media-overlay {
     position: absolute;
     top: 0; left: 0;
@@ -61,39 +49,71 @@
     justify-content: {{ section.settings.text_vertical_align }};
     align-items: {{ section.settings.text_horizontal_align }};
     text-align: {{ section.settings.text_align }};
-    padding: 40px;
+    padding: {{ section.settings.overlay_padding }}px;
     box-sizing: border-box;
     pointer-events: none;
+    gap: {{ section.settings.blocks_gap }}px;
   }
-  #section-{{ section.id }} .media-overlay .overlay-title {
-    color: {{ section.settings.text_color }};
-    font-size: {{ section.settings.title_size }}px;
-    font-weight: bold;
-    margin: 0 0 12px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-  #section-{{ section.id }} .media-overlay .overlay-subtitle {
-    color: {{ section.settings.text_color }};
-    font-size: {{ section.settings.subtitle_size }}px;
+
+  #section-{{ section.id }} .overlay-block {
     margin: 0;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    color: {{ section.settings.text_color }};
+  }
+
+  #section-{{ section.id }} .overlay-block.type-heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    text-transform: var(--font-heading-text-transform, none);
+    letter-spacing: var(--font-heading-letter-spacing, normal);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+
+  #section-{{ section.id }} .overlay-block.type-subheading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    opacity: 0.85;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  #section-{{ section.id }} .overlay-block.type-text {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    font-style: var(--font-body-style);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.25);
   }
 
   @media (max-width: 767px) {
-    #section-{{ section.id }} .media-desktop {
-      display: none;
-    }
-    #section-{{ section.id }} .media-mobile {
-      display: block;
-    }
-    #section-{{ section.id }} .media-overlay .overlay-title {
-      font-size: {{ section.settings.title_size_mobile }}px;
-    }
-    #section-{{ section.id }} .media-overlay .overlay-subtitle {
-      font-size: {{ section.settings.subtitle_size_mobile }}px;
-    }
+    #section-{{ section.id }} .media-desktop { display: none; }
+    #section-{{ section.id }} .media-mobile { display: block; }
   }
 </style>
+
+{%- liquid
+  assign overlay_html = ''
+  for block in section.blocks
+    assign font_size_desktop = block.settings.font_size_desktop
+    assign font_size_mobile = block.settings.font_size_mobile
+    assign block_color = block.settings.block_color
+    assign block_style = 'font-size:' | append: font_size_desktop | append: 'px;'
+    if block_color != blank
+      assign block_style = block_style | append: 'color:' | append: block_color | append: ';'
+    endif
+    assign mobile_style_tag = '<style>@media(max-width:767px){#section-' | append: section.id | append: ' [data-block="' | append: block.id | append: '"]{font-size:' | append: font_size_mobile | append: 'px!important;}}</style>'
+
+    if block.type == 'heading'
+      assign overlay_html = overlay_html | append: mobile_style_tag
+      assign overlay_html = overlay_html | append: '<p class="overlay-block type-heading" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
+    elsif block.type == 'subheading'
+      assign overlay_html = overlay_html | append: mobile_style_tag
+      assign overlay_html = overlay_html | append: '<p class="overlay-block type-subheading" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
+    elsif block.type == 'text'
+      assign overlay_html = overlay_html | append: mobile_style_tag
+      assign overlay_html = overlay_html | append: '<p class="overlay-block type-text" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
+    endif
+  endfor
+-%}
 
 <div id="section-{{ section.id }}">
   {% if link_url != blank %}
@@ -115,17 +135,8 @@
         </video>
       {% endif %}
     {% endif %}
-
-    {%- comment -%} OVERLAY TEXTE {%- endcomment -%}
-    {% if section.settings.overlay_title != blank or section.settings.overlay_subtitle != blank %}
-      <div class="media-overlay">
-        {% if section.settings.overlay_title != blank %}
-          <p class="overlay-title">{{ section.settings.overlay_title }}</p>
-        {% endif %}
-        {% if section.settings.overlay_subtitle != blank %}
-          <p class="overlay-subtitle">{{ section.settings.overlay_subtitle }}</p>
-        {% endif %}
-      </div>
+    {% if overlay_html != blank %}
+      <div class="media-overlay">{{ overlay_html }}</div>
     {% endif %}
   </div>
 
@@ -142,17 +153,8 @@
         </video>
       {% endif %}
     {% endif %}
-
-    {%- comment -%} OVERLAY TEXTE (même texte sur mobile) {%- endcomment -%}
-    {% if section.settings.overlay_title != blank or section.settings.overlay_subtitle != blank %}
-      <div class="media-overlay">
-        {% if section.settings.overlay_title != blank %}
-          <p class="overlay-title">{{ section.settings.overlay_title }}</p>
-        {% endif %}
-        {% if section.settings.overlay_subtitle != blank %}
-          <p class="overlay-subtitle">{{ section.settings.overlay_subtitle }}</p>
-        {% endif %}
-      </div>
+    {% if overlay_html != blank %}
+      <div class="media-overlay">{{ overlay_html }}</div>
     {% endif %}
   </div>
 
@@ -166,6 +168,113 @@
 {% schema %}
 {
   "name": "Média Desktop / Mobile",
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Titre",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte du titre",
+          "default": "Mon titre"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "label": "Taille (desktop, px)",
+          "min": 16,
+          "max": 120,
+          "step": 2,
+          "default": 56
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "label": "Taille (mobile, px)",
+          "min": 14,
+          "max": 72,
+          "step": 2,
+          "default": 32
+        },
+        {
+          "type": "color",
+          "id": "block_color",
+          "label": "Couleur (laisse vide pour hériter)"
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Sous-titre",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte du sous-titre",
+          "default": "Mon sous-titre"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "label": "Taille (desktop, px)",
+          "min": 12,
+          "max": 72,
+          "step": 2,
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "label": "Taille (mobile, px)",
+          "min": 12,
+          "max": 48,
+          "step": 2,
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "block_color",
+          "label": "Couleur (laisse vide pour hériter)"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Contenu",
+          "default": "Mon texte descriptif"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "label": "Taille (desktop, px)",
+          "min": 12,
+          "max": 48,
+          "step": 1,
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "label": "Taille (mobile, px)",
+          "min": 12,
+          "max": 36,
+          "step": 1,
+          "default": 15
+        },
+        {
+          "type": "color",
+          "id": "block_color",
+          "label": "Couleur (laisse vide pour hériter)"
+        }
+      ]
+    }
+  ],
   "settings": [
     {
       "type": "header",
@@ -257,66 +366,12 @@
     },
     {
       "type": "header",
-      "content": "✍️ Texte superposé"
-    },
-    {
-      "type": "text",
-      "id": "overlay_title",
-      "label": "Titre",
-      "placeholder": "Mon titre..."
-    },
-    {
-      "type": "range",
-      "id": "title_size",
-      "label": "Taille du titre (desktop, px)",
-      "min": 16,
-      "max": 100,
-      "step": 2,
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "title_size_mobile",
-      "label": "Taille du titre (mobile, px)",
-      "min": 14,
-      "max": 60,
-      "step": 2,
-      "default": 28
-    },
-    {
-      "type": "text",
-      "id": "overlay_subtitle",
-      "label": "Sous-titre",
-      "placeholder": "Mon sous-titre..."
-    },
-    {
-      "type": "range",
-      "id": "subtitle_size",
-      "label": "Taille du sous-titre (desktop, px)",
-      "min": 12,
-      "max": 60,
-      "step": 2,
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "subtitle_size_mobile",
-      "label": "Taille du sous-titre (mobile, px)",
-      "min": 12,
-      "max": 40,
-      "step": 2,
-      "default": 18
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Couleur du texte",
-      "default": "#ffffff"
+      "content": "✍️ Positionnement du texte"
     },
     {
       "type": "select",
       "id": "text_vertical_align",
-      "label": "Position verticale du texte",
+      "label": "Position verticale",
       "options": [
         { "value": "flex-start", "label": "Haut" },
         { "value": "center", "label": "Centre" },
@@ -327,7 +382,7 @@
     {
       "type": "select",
       "id": "text_horizontal_align",
-      "label": "Position horizontale du texte",
+      "label": "Position horizontale",
       "options": [
         { "value": "flex-start", "label": "Gauche" },
         { "value": "center", "label": "Centre" },
@@ -347,6 +402,30 @@
       "default": "center"
     },
     {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte (par défaut)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_padding",
+      "label": "Marge intérieure (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "blocks_gap",
+      "label": "Espacement entre les blocs (px)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "default": 12
+    },
+    {
       "type": "header",
       "content": "🔗 Lien"
     },
@@ -364,7 +443,12 @@
   ],
   "presets": [
     {
-      "name": "Média Desktop / Mobile"
+      "name": "Média Desktop / Mobile",
+      "blocks": [
+        { "type": "subheading" },
+        { "type": "heading" },
+        { "type": "text" }
+      ]
     }
   ]
 }
