@@ -9,8 +9,8 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/ONLY_WINNERS_LOSE_white_logo.png",
-    "logo_inverse": "shopify://shop_images/ONLY_WINNERS_LOSE_black_logo.png",
+    "logo": "shopify://shop_images/Logo_Blanc.png",
+    "logo_inverse": "shopify://shop_images/Logo_Noir.png",
     "favicon": "shopify://shop_images/OWL_logo_White_on_black.jpg",
     "type_body_font": "geist_n4",
     "type_subheading_font": "geist_n4",
@@ -119,11 +119,6 @@
       },
       "15119538188275799212": {
         "type": "shopify://apps/fontify/blocks/app-embed/334490e2-2153-4a2e-a452-e90bdeffa3cc",
-        "disabled": false,
-        "settings": {}
-      },
-      "4550790387604203027": {
-        "type": "shopify://apps/parcelwill-returns/blocks/app.embed/129d97fb-4680-4d86-bac4-b13c4bacb6f4",
         "disabled": false,
         "settings": {}
       },
