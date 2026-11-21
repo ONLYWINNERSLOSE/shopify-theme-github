@@ -150,14 +150,15 @@
       rgb(0 0 0 / 0.02) 52%,
       rgb(0 0 0 / 0.28) 100%
     );
-    border: 1px solid rgb(255 255 255 / 0.62);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.85),
-      inset 1px 0 0 rgb(255 255 255 / 0.22),
-      inset 0 -1px 0 rgb(0 0 0 / 0.45),
-      0 1px 3px rgb(0 0 0 / 0.25);
+    border: 0;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
     text-shadow: 0 1px 2px rgb(0 0 0 / 0.75);
     font-weight: 600;
+  }
+
+  .product-badges .product-badges__badge.badge--limited-offer,
+  .product-badges .badge--limited-offer .limited-offer__label {
+    font-family: "Courier New", Courier, monospace !important;
   }
 
   .badge--limited-offer .limited-offer__label {
