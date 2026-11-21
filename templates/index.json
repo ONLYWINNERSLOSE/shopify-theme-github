@@ -24,7 +24,7 @@
             "uppercase": false,
             "letter_spacing": 0,
             "margin_bottom": 0,
-            "block_color": "#ff0000"
+            "block_color": "#FF0000"
           }
         },
         "subheading_afhX6H": {
@@ -34,7 +34,7 @@
             "split_text": true,
             "text_left": "Jusqu'à",
             "text_right": "-30 %",
-            "font_size_desktop": 16,
+            "font_size_desktop": 20,
             "font_size_mobile": 12,
             "bold": false,
             "italic": false,
@@ -51,8 +51,8 @@
         "subheading_afhX6H"
       ],
       "custom_css": [
-        ".media-overlay .overlay-block.type-heading, .media-overlay .overlay-block.type-heading * {font-family: Helvetica, Arial, sans-serif !important; }",
-        ".media-overlay .overlay-block.type-subheading, .media-overlay .overlay-block.type-subheading * {font-family: \"Courier New\", Courier, monospace !important; }"
+        ".media-overlay .overlay-block.type-heading,.media-overlay .overlay-block.type-heading * {font-family: Helvetica, Arial, sans-serif !important;}",
+        ".media-overlay .overlay-block.type-subheading,.media-overlay .overlay-block.type-subheading * {font-family: \"Courier New\", Courier, monospace !important;}"
       ],
       "name": "Média Desktop / Mobile",
       "settings": {
@@ -64,10 +64,10 @@
         "video_url_mobile": "https://cdn.shopify.com/videos/c/o/v/043c2fd101b34e329adaeb917af1d80c.mp4",
         "height_type_mobile": "fullscreen",
         "height_mobile": 400,
-        "subtitle_gap": -4,
         "text_vertical_align": "center",
         "text_horizontal_align": "center",
         "text_align": "center",
+        "subtitle_gap": -4,
         "text_color": "#ffffff",
         "overlay_padding": 20,
         "link_url": "shopify://collections/the-edge-of-falling",
