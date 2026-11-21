@@ -12,28 +12,28 @@
     "media_desktop_mobile_K79HEc": {
       "type": "media-desktop-mobile",
       "blocks": {
-        "subheading_afhX6H": {
-          "type": "subheading",
+        "heading_7mNfdT": {
+          "type": "heading",
           "settings": {
-            "text": "Nouvelle collection",
-            "font_size_desktop": 16,
-            "font_size_mobile": 12,
-            "bold": false,
+            "text": "SALES",
+            "font_size_desktop": 74,
+            "font_size_mobile": 50,
+            "bold": true,
             "italic": false,
             "underline": false,
             "uppercase": false,
             "letter_spacing": 0,
-            "margin_bottom": -4,
-            "block_color": ""
+            "margin_bottom": 0,
+            "block_color": "#FF0000"
           }
         },
-        "heading_7mNfdT": {
-          "type": "heading",
+        "subheading_afhX6H": {
+          "type": "subheading",
           "settings": {
-            "text": "THE EDGE OF FALLING",
-            "font_size_desktop": 24,
-            "font_size_mobile": 18,
-            "bold": true,
+            "text": "Jusqu'à 30%",
+            "font_size_desktop": 16,
+            "font_size_mobile": 12,
+            "bold": false,
             "italic": false,
             "underline": false,
             "uppercase": false,
@@ -44,21 +44,21 @@
         }
       },
       "block_order": [
-        "subheading_afhX6H",
-        "heading_7mNfdT"
+        "heading_7mNfdT",
+        "subheading_afhX6H"
       ],
       "name": "Média Desktop / Mobile",
       "settings": {
         "media_type_desktop": "video",
         "video_url_desktop": "https://cdn.shopify.com/videos/c/o/v/043c2fd101b34e329adaeb917af1d80c.mp4",
         "height_type_desktop": "fullscreen",
-        "height_desktop": 600,
+        "height_desktop": 1000,
         "media_type_mobile": "video",
         "video_url_mobile": "https://cdn.shopify.com/videos/c/o/v/043c2fd101b34e329adaeb917af1d80c.mp4",
         "height_type_mobile": "fullscreen",
         "height_mobile": 400,
         "text_vertical_align": "center",
-        "text_horizontal_align": "flex-start",
+        "text_horizontal_align": "center",
         "text_align": "center",
         "text_color": "#ffffff",
         "overlay_padding": 20,
