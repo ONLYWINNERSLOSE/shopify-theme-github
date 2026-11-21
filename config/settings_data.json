@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Logo_Blanc.png",
+    "logo": "shopify://shop_images/Sutur-logo-blanc-HD-opaque.png",
     "logo_inverse": "shopify://shop_images/Logo_Noir.png",
     "favicon": "shopify://shop_images/Favicon_0464402f-f59b-42d5-b881-026867084952.jpg",
     "type_body_font": "geist_n4",
@@ -453,9 +453,9 @@
       },
       "scheme-a087b02f-0c9d-4b79-8f67-708db9cf17b1": {
         "settings": {
-          "background": "#FF0000",
+          "background": "#ff0000",
           "foreground_heading": "#686a6d",
-          "foreground": "#FFFFFF",
+          "foreground": "#ffffff",
           "primary": "#6a686d",
           "primary_hover": "#ffffff",
           "border": "#6d6868",
@@ -466,13 +466,13 @@
           "primary_button_hover_background": "#6a686d",
           "primary_button_hover_text": "#ffffff",
           "primary_button_hover_border": "#000000",
-          "secondary_button_background": "#FF0000",
+          "secondary_button_background": "#ff0000",
           "secondary_button_text": "#ffffff",
           "secondary_button_border": "#000000",
           "secondary_button_hover_background": "#dedede",
           "secondary_button_hover_text": "#000000",
           "secondary_button_hover_border": "#000000",
-          "input_background": "#FF0000",
+          "input_background": "#ff0000",
           "input_text_color": "#ffffff",
           "input_border_color": "#686a6d",
           "input_hover_background": "#686a6d",
@@ -482,7 +482,7 @@
           "variant_hover_background_color": "#ffffff",
           "variant_hover_text_color": "#000000",
           "variant_hover_border_color": "#d2d2d2",
-          "selected_variant_background_color": "#FF0000",
+          "selected_variant_background_color": "#ff0000",
           "selected_variant_text_color": "#ffffff",
           "selected_variant_border_color": "#686a6d",
           "selected_variant_hover_background_color": "#686a6d",
