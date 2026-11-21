@@ -134,7 +134,7 @@
     padding-inline: var(--badge-rectangle-padding-inline);
   }
 
-  /* Compact red enamel badge with a distinct upper gloss reflection. */
+  /* Scale the entire badge uniformly; keep the lacquer reflections red. */
   .product-badges__badge.badge--limited-offer {
     position: relative;
     overflow: hidden;
@@ -142,14 +142,16 @@
     background-color: var(--color-background);
     background-image: linear-gradient(
       180deg,
-      #ff3428 0%,
-      #f20c00 44%,
-      #e40800 50%,
-      #f40900 58%,
-      #bb050d 100%
+      #ff1600 0%,
+      #ff390d 12%,
+      #ef0900 42%,
+      #bf0308 49%,
+      #ee0800 58%,
+      #a90008 100%
     );
     border: 0;
     border-radius: 0;
+    zoom: 0.8;
     font-size: 0.6rem;
     padding: 0.45em 0.65em;
     box-shadow: none;
@@ -168,11 +170,30 @@
   .badge--limited-offer::before {
     content: '';
     position: absolute;
-    inset: 0 0 auto;
-    height: 43%;
-    border-radius: 0 0 50% 50% / 0 0 18% 18%;
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.12));
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgb(255 76 20 / 0.12) 40%,
+      rgb(255 100 35 / 0.48) 50%,
+      rgb(255 76 20 / 0.12) 60%,
+      transparent 70%
+    );
+    transform: translateX(-110%);
+    animation: limited-offer-red-gloss 4s ease-in-out infinite;
     pointer-events: none;
+  }
+
+  @keyframes limited-offer-red-gloss {
+    0%, 45% { transform: translateX(-110%); }
+    100% { transform: translateX(110%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge--limited-offer::before {
+      animation: none;
+      transform: none;
+    }
   }
 
   .badge--limited-offer .limited-offer__label {
