@@ -111,11 +111,13 @@
     min-width: 0;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+    font-size: var(--split-size-desktop, inherit);
   }
   #section-{{ section.id }} .split-text__left { text-align: left; }
   #section-{{ section.id }} .split-text__right { text-align: right; }
 
   @media (max-width: 767px) {
+    #section-{{ section.id }} .split-text > span { font-size: var(--split-size-mobile, inherit); }
     #section-{{ section.id }} .media-desktop { display: none; }
     #section-{{ section.id }} .media-mobile { display: block; }
   }
@@ -178,7 +180,50 @@
         assign has_split_text = true
         assign left_text = block.settings.text_left | escape
         assign right_text = block.settings.text_right | escape
-        assign overlay_html = overlay_html | append: '<div class="overlay-block type-subheading split-text" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '" ' | append: block.shopify_attributes | append: '><span class="split-text__left">' | append: left_text | append: '</span><span class="split-text__right">' | append: right_text | append: '</span></div>'
+        assign split_block_style = block_style | replace: 'text-decoration:underline;', 'text-decoration:none;'
+        assign text_sides = 'left,right' | split: ','
+        for side in text_sides
+          assign side_style = 'text-decoration:' | append: td | append: ';'
+          assign customize_key = 'customize_' | append: side
+          if block.settings[customize_key]
+            assign weight_key = side | append: '_bold'
+            assign italic_key = side | append: '_italic'
+            assign underline_key = side | append: '_underline'
+            assign uppercase_key = side | append: '_uppercase'
+            assign color_key = side | append: '_color'
+            assign desktop_key = side | append: '_size_desktop'
+            assign mobile_key = side | append: '_size_mobile'
+            assign spacing_key = side | append: '_letter_spacing'
+            assign side_weight = 'normal'
+            assign side_italic = 'normal'
+            assign side_decoration = 'none'
+            assign side_case = 'none'
+            if block.settings[weight_key]
+              assign side_weight = 'bold'
+            endif
+            if block.settings[italic_key]
+              assign side_italic = 'italic'
+            endif
+            if block.settings[underline_key]
+              assign side_decoration = 'underline'
+            endif
+            if block.settings[uppercase_key]
+              assign side_case = 'uppercase'
+            endif
+            assign side_style = 'font-weight:' | append: side_weight | append: ';font-style:' | append: side_italic | append: ';text-decoration:' | append: side_decoration | append: ';text-transform:' | append: side_case | append: ';'
+            assign side_style = side_style | append: '--split-size-desktop:' | append: block.settings[desktop_key] | append: 'px;--split-size-mobile:' | append: block.settings[mobile_key] | append: 'px;'
+            assign side_style = side_style | append: 'letter-spacing:' | append: block.settings[spacing_key] | append: 'px;'
+            if block.settings[color_key] != blank
+              assign side_style = side_style | append: 'color:' | append: block.settings[color_key] | append: ';'
+            endif
+          endif
+          if side == 'left'
+            assign left_style = side_style
+          else
+            assign right_style = side_style
+          endif
+        endfor
+        assign overlay_html = overlay_html | append: '<div class="overlay-block type-subheading split-text" data-block="' | append: block.id | append: '" style="' | append: split_block_style | append: '" ' | append: block.shopify_attributes | append: '><span class="split-text__left" style="' | append: left_style | append: '">' | append: left_text | append: '</span><span class="split-text__right" style="' | append: right_style | append: '">' | append: right_text | append: '</span></div>'
       else
         assign overlay_html = overlay_html | append: '<p class="overlay-block type-subheading" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
       endif
@@ -354,6 +399,166 @@
           "label": "Texte à droite",
           "default": "-30 %",
           "visible_if": "{{ block.settings.split_text }}"
+        },
+        {
+          "type": "header",
+          "content": "Style du texte à gauche",
+          "visible_if": "{{ block.settings.split_text }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "customize_left",
+          "label": "Personnaliser le texte à gauche",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text }}"
+        },
+        {
+          "type": "color",
+          "id": "left_color",
+          "label": "Couleur à gauche",
+          "info": "Laisser vide pour conserver la couleur commune.",
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "left_bold",
+          "label": "Gras à gauche",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "left_italic",
+          "label": "Italique à gauche",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "left_underline",
+          "label": "Souligné à gauche",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "left_uppercase",
+          "label": "Majuscules à gauche",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "range",
+          "id": "left_size_desktop",
+          "label": "Taille à gauche (ordinateur)",
+          "min": 12,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "default": 20,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "range",
+          "id": "left_size_mobile",
+          "label": "Taille à gauche (mobile)",
+          "min": 12,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 12,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "range",
+          "id": "left_letter_spacing",
+          "label": "Espacement des lettres à gauche",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 0,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_left }}"
+        },
+        {
+          "type": "header",
+          "content": "Style du texte à droite",
+          "visible_if": "{{ block.settings.split_text }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "customize_right",
+          "label": "Personnaliser le texte à droite",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text }}"
+        },
+        {
+          "type": "color",
+          "id": "right_color",
+          "label": "Couleur à droite",
+          "info": "Laisser vide pour conserver la couleur commune.",
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "right_bold",
+          "label": "Gras à droite",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "right_italic",
+          "label": "Italique à droite",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "right_underline",
+          "label": "Souligné à droite",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "right_uppercase",
+          "label": "Majuscules à droite",
+          "default": false,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "range",
+          "id": "right_size_desktop",
+          "label": "Taille à droite (ordinateur)",
+          "min": 12,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "default": 20,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "range",
+          "id": "right_size_mobile",
+          "label": "Taille à droite (mobile)",
+          "min": 12,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 12,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
+        },
+        {
+          "type": "range",
+          "id": "right_letter_spacing",
+          "label": "Espacement des lettres à droite",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 0,
+          "visible_if": "{{ block.settings.split_text and block.settings.customize_right }}"
         },
         {
           "type": "range",
