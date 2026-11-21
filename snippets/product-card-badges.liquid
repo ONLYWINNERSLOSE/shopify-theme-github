@@ -134,78 +134,45 @@
     padding-inline: var(--badge-rectangle-padding-inline);
   }
 
-  /* Polished red finish with a moving specular highlight. */
+  /* Smooth lacquered red, without a white stripe across the lettering. */
   .product-badges__badge.badge--limited-offer {
     position: relative;
-    isolation: isolate;
     overflow: hidden;
     color: var(--color-foreground);
     background-color: var(--color-background);
     background-image:
       radial-gradient(
-        ellipse at 22% -35%,
-        rgb(255 255 255 / 0.60),
-        transparent 68%
-      ),
-      linear-gradient(
-        112deg,
-        transparent 20%,
-        rgb(255 255 255 / 0.05) 34%,
-        rgb(255 255 255 / 0.28) 44%,
-        rgb(255 255 255 / 0.06) 50%,
-        transparent 62%
+        ellipse at 50% -100%,
+        rgb(255 255 255 / 0.38),
+        transparent 78%
       ),
       linear-gradient(
         180deg,
-        rgb(0 0 0 / 0.10),
-        transparent 45%,
-        rgb(0 0 0 / 0.30)
+        rgb(255 255 255 / 0.16),
+        transparent 48%,
+        rgb(0 0 0 / 0.28)
       );
     border: 0;
     box-shadow:
-      inset 0 -1px 0 rgb(0 0 0 / 0.18),
+      inset 0 -1px 1px rgb(0 0 0 / 0.20),
       0 1px 2px rgb(0 0 0 / 0.16);
-    text-shadow: 0 -1px 0 rgb(55 0 5 / 0.50);
-    font-weight: 600;
+    text-shadow: none;
   }
 
   .product-badges .product-badges__badge.badge--limited-offer,
   .product-badges .badge--limited-offer .limited-offer__label {
-    font-family: Helvetica, Arial, sans-serif !important;
+    font-family: 'Marcellus', Georgia, serif !important;
+    font-weight: 400;
   }
 
   .badge--limited-offer .limited-offer__label {
-    position: relative;
-    z-index: 1;
-  }
-
-  .badge--limited-offer::before {
-    content: '';
-    z-index: 2;
-    position: absolute;
-    inset-block: -30%;
-    inset-inline-start: 0;
-    width: 35%;
-    pointer-events: none;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgb(255 255 255 / 0.20) 35%,
-      rgb(255 255 255 / 0.48) 50%,
-      rgb(255 255 255 / 0.20) 65%,
-      transparent
-    );
-    transform: translateX(-180%) skewX(-20deg);
-    animation: limited-offer-shine 4.5s ease-in-out infinite;
-  }
-
-  @keyframes limited-offer-shine {
-    0%, 65% { transform: translateX(-180%) skewX(-20deg); }
-    100% { transform: translateX(420%) skewX(-20deg); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .badge--limited-offer::before { animation: none; }
+    /* A shallow tonal recess instead of a detached drop shadow. */
+    background-image: linear-gradient(180deg, #e1d6d6 0%, #fff 45%, #f8f4f4 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0.35px 0 rgb(255 255 255 / 0.25));
   }
 
   /* --- Styles pour vos badges personnalisés (avec !important pour forcer si besoin) --- */
