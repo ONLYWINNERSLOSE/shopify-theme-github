@@ -31,6 +31,9 @@
           "type": "subheading",
           "settings": {
             "text": "Jusqu'à 30%",
+            "split_text": true,
+            "text_left": "Jusqu'à",
+            "text_right": "-30 %",
             "font_size_desktop": 16,
             "font_size_mobile": 12,
             "bold": false,
@@ -61,6 +64,7 @@
         "video_url_mobile": "https://cdn.shopify.com/videos/c/o/v/043c2fd101b34e329adaeb917af1d80c.mp4",
         "height_type_mobile": "fullscreen",
         "height_mobile": 400,
+        "subtitle_gap": -4,
         "text_vertical_align": "center",
         "text_horizontal_align": "center",
         "text_align": "center",

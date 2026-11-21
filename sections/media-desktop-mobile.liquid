@@ -81,6 +81,40 @@
     text-shadow: 0 1px 6px rgba(0,0,0,0.25);
   }
 
+  #section-{{ section.id }} .overlay-content {
+    max-width: 100%;
+  }
+  #section-{{ section.id }} .overlay-content.is-split {
+    display: grid;
+    width: max-content;
+    max-width: 100%;
+    min-width: 0;
+  }
+  #section-{{ section.id }} .overlay-content.is-split .type-heading {
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+  #section-{{ section.id }} .overlay-block.type-subheading {
+    line-height: 1.2;
+    margin-top: {{ section.settings.subtitle_gap | default: 0 }}px;
+  }
+  #section-{{ section.id }} .overlay-block.split-text {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 12px;
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  #section-{{ section.id }} .split-text__left,
+  #section-{{ section.id }} .split-text__right {
+    min-width: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  #section-{{ section.id }} .split-text__left { text-align: left; }
+  #section-{{ section.id }} .split-text__right { text-align: right; }
+
   @media (max-width: 767px) {
     #section-{{ section.id }} .media-desktop { display: none; }
     #section-{{ section.id }} .media-mobile { display: block; }
@@ -89,6 +123,7 @@
 
 {%- liquid
   assign overlay_html = ''
+  assign has_split_text = false
   for block in section.blocks
     assign font_size_desktop = block.settings.font_size_desktop
     assign font_size_mobile = block.settings.font_size_mobile
@@ -139,7 +174,14 @@
       assign overlay_html = overlay_html | append: '<p class="overlay-block type-heading" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
     elsif block.type == 'subheading'
       assign overlay_html = overlay_html | append: mobile_style_tag
-      assign overlay_html = overlay_html | append: '<p class="overlay-block type-subheading" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
+      if block.settings.split_text
+        assign has_split_text = true
+        assign left_text = block.settings.text_left | escape
+        assign right_text = block.settings.text_right | escape
+        assign overlay_html = overlay_html | append: '<div class="overlay-block type-subheading split-text" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '" ' | append: block.shopify_attributes | append: '><span class="split-text__left">' | append: left_text | append: '</span><span class="split-text__right">' | append: right_text | append: '</span></div>'
+      else
+        assign overlay_html = overlay_html | append: '<p class="overlay-block type-subheading" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
+      endif
     elsif block.type == 'text'
       assign overlay_html = overlay_html | append: mobile_style_tag
       assign overlay_html = overlay_html | append: '<p class="overlay-block type-text" data-block="' | append: block.id | append: '" style="' | append: block_style | append: '">' | append: block.settings.text | append: '</p>'
@@ -168,7 +210,7 @@
       {% endif %}
     {% endif %}
     {% if overlay_html != blank %}
-      <div class="media-overlay">{{ overlay_html }}</div>
+      <div class="media-overlay"><div class="overlay-content{% if has_split_text %} is-split{% endif %}">{{ overlay_html }}</div></div>
     {% endif %}
   </div>
 
@@ -186,7 +228,7 @@
       {% endif %}
     {% endif %}
     {% if overlay_html != blank %}
-      <div class="media-overlay">{{ overlay_html }}</div>
+      <div class="media-overlay"><div class="overlay-content{% if has_split_text %} is-split{% endif %}">{{ overlay_html }}</div></div>
     {% endif %}
   </div>
 
@@ -290,7 +332,28 @@
           "type": "text",
           "id": "text",
           "label": "Texte du sous-titre",
-          "default": "Mon sous-titre"
+          "default": "Mon sous-titre",
+          "visible_if": "{{ block.settings.split_text == false }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "split_text",
+          "label": "Aligner deux textes sous le titre",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "text_left",
+          "label": "Texte à gauche",
+          "default": "Jusqu'à",
+          "visible_if": "{{ block.settings.split_text }}"
+        },
+        {
+          "type": "textarea",
+          "id": "text_right",
+          "label": "Texte à droite",
+          "default": "-30 %",
+          "visible_if": "{{ block.settings.split_text }}"
         },
         {
           "type": "range",
@@ -570,6 +633,17 @@
         { "value": "right", "label": "Droite" }
       ],
       "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_gap",
+      "label": "Distance titre / sous-titre",
+      "info": "Une valeur négative rapproche les deux lignes. L’espace après le bloc Titre s’ajoute à cette valeur.",
+      "min": -40,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "color",
