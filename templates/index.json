@@ -24,7 +24,7 @@
             "uppercase": false,
             "letter_spacing": 0,
             "margin_bottom": 0,
-            "block_color": "#FF0000"
+            "block_color": "#ff0000"
           }
         },
         "subheading_afhX6H": {
@@ -46,6 +46,10 @@
       "block_order": [
         "heading_7mNfdT",
         "subheading_afhX6H"
+      ],
+      "custom_css": [
+        ".media-overlay .overlay-block.type-heading, .media-overlay .overlay-block.type-heading * {font-family: Helvetica, Arial, sans-serif !important; }",
+        ".media-overlay .overlay-block.type-subheading, .media-overlay .overlay-block.type-subheading * {font-family: \"Courier New\", Courier, monospace !important; }"
       ],
       "name": "Média Desktop / Mobile",
       "settings": {
