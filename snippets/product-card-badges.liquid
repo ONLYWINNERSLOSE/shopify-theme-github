@@ -71,6 +71,15 @@
       {{ 'content.product_badge_sold_out' | t }}
     </div>
   {% elsif product.compare_at_price > product.price %}
+    {% liquid
+      assign badge_language = localization.language.iso_code | default: request.locale.iso_code | downcase | split: '-' | first
+      assign badge_offer = 'content.product_badge_sale' | t
+      if badge_language == 'fr'
+        assign badge_clearance = 'Liquidation'
+      else
+        assign badge_clearance = 'Clearance'
+      endif
+    %}
     <div
       class="
         product-badges__badge product-badges__badge--rectangle
@@ -78,7 +87,10 @@
         color-{{ settings.badge_sale_color_scheme }}
       "
     >
-      <span class="limited-offer__label">{{ 'content.product_badge_sale' | t }}</span>
+      <span class="limited-offer__labels" role="img" aria-label="{{ badge_offer | escape }} — {{ badge_clearance | escape }}">
+        <span class="limited-offer__label limited-offer__label--offer" aria-hidden="true">{{ badge_offer | escape }}</span>
+        <span class="limited-offer__label limited-offer__label--clearance" aria-hidden="true">{{ badge_clearance | escape }}</span>
+      </span>
     </div>
   {% elsif product_tags contains 'new' %}
     <div
@@ -186,6 +198,69 @@
     position: relative;
     color: #fff;
     -webkit-text-fill-color: #fff;
+  }
+
+
+  /* A 12s loop: 5s to read each label, then a 1s light wipe. */
+  .badge--limited-offer .limited-offer__labels {
+    --limited-offer-cycle: 12s;
+    position: relative;
+    display: inline-grid;
+    isolation: isolate;
+    white-space: nowrap;
+  }
+
+  .badge--limited-offer .limited-offer__label {
+    grid-area: 1 / 1;
+    animation: limited-offer-text var(--limited-offer-cycle) linear infinite;
+  }
+
+  .badge--limited-offer .limited-offer__label--clearance {
+    clip-path: inset(0 100% 0 0);
+    animation-name: limited-offer-clearance;
+  }
+
+  .badge--limited-offer .limited-offer__labels::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: -60% -35%;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 39%, rgb(255 255 255 / 12%) 44%, rgb(255 255 255 / 70%) 50%, rgb(255 255 255 / 12%) 56%, transparent 61%);
+    transform: translateX(-100%);
+    animation: limited-offer-shine var(--limited-offer-cycle) linear infinite;
+  }
+
+  @keyframes limited-offer-text {
+    0%, 41.666% { clip-path: inset(0 0 0 0); }
+    50%, 91.666% { clip-path: inset(0 0 0 100%); }
+    91.667% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+
+  @keyframes limited-offer-clearance {
+    0%, 41.666% { clip-path: inset(0 100% 0 0); }
+    50%, 91.666% { clip-path: inset(0 0 0 0); }
+    100% { clip-path: inset(0 0 0 100%); }
+  }
+
+  @keyframes limited-offer-shine {
+    0%, 41.666% { transform: translateX(-100%); }
+    50%, 50.001% { transform: translateX(100%); }
+    50.002%, 91.666% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge--limited-offer .limited-offer__label {
+      animation: none;
+      clip-path: none;
+    }
+
+    .badge--limited-offer .limited-offer__label--clearance,
+    .badge--limited-offer .limited-offer__labels::after {
+      display: none;
+    }
   }
 
   /* --- Styles pour vos badges personnalisés (avec !important pour forcer si besoin) --- */
