@@ -92,23 +92,26 @@
 {% stylesheet %}
   .product-price-detail .price,
   .product-price-detail .compare-at-price {
-    font-size: 1.5em;
+    font-size: 1.25em;
   }
 
-  .product-price-detail__offer {
+  .product-price-detail__row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem 0.75rem;
-    margin-top: 0.6rem;
-    font-size: max(0.75rem, 1em);
-    line-height: 1.4;
-    text-transform: none;
-    letter-spacing: normal;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .product-price-detail__amounts {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35em;
   }
 
   .product-price-detail__badge {
     display: inline-block;
+    font-size: max(0.625rem, 0.85em);
+    line-height: 1.4;
     padding: 0.4em 0.65em;
     background: linear-gradient(110deg, #ff0000, #cb1717);
     color: #fff;
@@ -119,9 +122,6 @@
     white-space: nowrap;
   }
 
-  .product-price-detail__saving {
-    color: var(--color-foreground);
-  }
 
   .tax-note:empty {
     display: none;
