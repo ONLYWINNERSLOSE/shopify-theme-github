@@ -34,6 +34,14 @@
         {%- liquid
           assign swatch_count = product_option.values | map: 'swatch' | compact | size
           assign variant_style = block.settings.variant_style
+          assign option_name = product_option.name | downcase
+          assign show_size_stock = false
+          if request.page_type == 'product' and product_resource.id == product.id
+            if option_name contains 'taille' or option_name contains 'size'
+              assign show_size_stock = true
+            endif
+          endif
+          assign stock_language = localization.language.iso_code | default: request.locale.iso_code | downcase | split: '-' | first
 
           if swatch_count > 0 and block.settings.show_swatches
             if block.settings.variant_style == 'dropdown'
@@ -52,7 +60,7 @@
 
         {%- if variant_style == 'swatch' or block.settings.variant_style == 'buttons' -%}
           <fieldset
-            class="variant-option variant-option--buttons{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}"
+            class="variant-option variant-option--buttons{% if show_size_stock %} variant-option--size-stock{% endif %}{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}"
             {{ option_id_attribute }}
           >
             <legend>
@@ -103,6 +111,21 @@
                   %}
                 {% else %}
                   <span class="variant-option__button-label__text">{{ product_option_value | escape }}</span>
+                  {% if show_size_stock %}
+                    {% assign size_variant = product_option_value.variant %}
+                    <span class="variant-option__stock{% unless product_option_value.available %} variant-option__stock--sold-out{% endunless %}">
+                      <span class="variant-option__stock-dot" aria-hidden="true"></span>
+                      {% if product_option_value.available == false %}
+                        {% if stock_language == 'fr' %}Épuisé{% else %}Sold out{% endif %}
+                      {% elsif size_variant.inventory_management == 'shopify' and size_variant.inventory_quantity > 0 %}
+                        {{ size_variant.inventory_quantity }} {% if stock_language == 'fr' %}en stock{% else %}in stock{% endif %}
+                      {% elsif size_variant.inventory_management == 'shopify' and size_variant.inventory_quantity <= 0 and size_variant.inventory_policy == 'continue' %}
+                        {% if stock_language == 'fr' %}Sur commande{% else %}On backorder{% endif %}
+                      {% else %}
+                        {% if stock_language == 'fr' %}En stock{% else %}In stock{% endif %}
+                      {% endif %}
+                    </span>
+                  {% endif %}
                 {% endif %}
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>

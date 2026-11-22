@@ -413,6 +413,65 @@
     height: 12px;
   }
 
+
+  /* Joined size cells with per-variant inventory. */
+  .product-information .variant-option--size-stock:not(.variant-option--swatches) {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .product-information .variant-option--size-stock .variant-option__button-label:not(.variant-option__button-label--has-swatch) {
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 6px 3px;
+    font-size: 0.75rem;
+    letter-spacing: normal;
+    margin-inline-end: -1px;
+  }
+
+  .product-information .variant-option--size-stock .variant-option__button-label:last-child {
+    margin-inline-end: 0;
+  }
+
+  .product-information .variant-option--size-stock .variant-option__button-label:has(:checked) {
+    z-index: 1;
+  }
+
+  .product-information .variant-option__stock {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1.25;
+    white-space: nowrap;
+    letter-spacing: normal;
+  }
+
+  .product-information .variant-option__stock-dot {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    background: #ffc1c1;
+  }
+
+  .product-information .variant-option__stock--sold-out .variant-option__stock-dot {
+    background: currentcolor;
+    opacity: 0.4;
+  }
+
+  .product-information .variant-option--size-stock .variant-option__button-label > svg {
+    display: none;
+  }
+
+  .product-information .variant-option--size-stock .variant-option__button-label:has([data-option-available='false']) .variant-option__button-label__text {
+    text-decoration: line-through;
+  }
 {% endstylesheet %}
 
 {% schema %}

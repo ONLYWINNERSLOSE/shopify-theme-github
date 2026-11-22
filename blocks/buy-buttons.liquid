@@ -67,7 +67,9 @@
           class="product-form-buttons spacing-style{% if block.settings.stacking %} product-form-buttons--stacked{% endif %}"
           style="{% render 'spacing-style', settings: block.settings %}"
         >
-          {% content_for 'block', type: 'quantity', id: 'quantity' %}
+          {% unless request.page_type == 'product' and product.id == closest.product.id %}
+            {% content_for 'block', type: 'quantity', id: 'quantity' %}
+          {% endunless %}
 
           {% content_for 'block',
             type: 'add-to-cart',
