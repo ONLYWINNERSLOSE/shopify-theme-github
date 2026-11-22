@@ -3,6 +3,7 @@
   It is used in the product block,featured product block, and the product card block.
 
   @param {product} product_resource - The product to render
+  @param {boolean} [show_product_offer] - Show larger prices and a static sale offer on product pages
   @param {boolean} [show_unit_price] - Whether to show the unit price
   @param {boolean} [show_sale_price_first] - Whether to show the sale price first
 {%- enddoc -%}
@@ -41,7 +42,7 @@
   endif
 -%}
 
-<div ref="priceContainer">
+<div ref="priceContainer"{% if show_product_offer %} class="product-price-detail"{% endif %}>
   {% if show_sale_price_first == false and show_compare_price %}
     <span role="group">
       <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
@@ -76,4 +77,26 @@
     -%}
     {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
   {%- endif -%}
+  {% if show_product_offer and show_compare_price %}
+    {% liquid
+      assign offer_language = localization.language.iso_code | default: request.locale.iso_code | downcase | split: '-' | first
+      assign savings = selected_variant.compare_at_price | minus: selected_variant.price
+      if settings.currency_code_enabled_product_pages
+        assign savings = savings | money_with_currency
+      else
+        assign savings = savings | money
+      endif
+    %}
+    <div class="product-price-detail__offer">
+      <span class="product-price-detail__badge">{{ 'content.product_badge_sale' | t }}</span>
+      <span class="product-price-detail__saving">
+        {% if offer_language == 'fr' %}
+          Économisez {{ savings }}
+        {% else %}
+          Save {{ savings }}
+        {% endif %}
+      </span>
+    </div>
+  {% endif %}
+
 </div>

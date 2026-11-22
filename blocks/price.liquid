@@ -3,6 +3,10 @@
 {%- liquid
   assign product_resource = closest.product
   assign selected_variant = product_resource.selected_or_first_available_variant
+  assign show_product_offer = false
+  if request.page_type == 'product' and product_resource.id == product.id
+    assign show_product_offer = true
+  endif
 -%}
 
 {% liquid
@@ -48,6 +52,7 @@
 >
   {% render 'price',
     show_unit_price: true,
+    show_product_offer: show_product_offer,
     product_resource: product_resource,
     show_sale_price_first: block.settings.show_sale_price_first
   %}
@@ -85,6 +90,39 @@
 
 {% # theme-check-disable %}
 {% stylesheet %}
+  .product-price-detail .price,
+  .product-price-detail .compare-at-price {
+    font-size: 1.5em;
+  }
+
+  .product-price-detail__offer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-top: 0.6rem;
+    font-size: max(0.75rem, 1em);
+    line-height: 1.4;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .product-price-detail__badge {
+    display: inline-block;
+    padding: 0.4em 0.65em;
+    background: linear-gradient(110deg, #ff0000, #cb1717);
+    color: #fff;
+    font-family: 'Marcellus', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .product-price-detail__saving {
+    color: var(--color-foreground);
+  }
+
   .tax-note:empty {
     display: none;
   }
