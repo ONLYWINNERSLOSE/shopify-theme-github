@@ -218,32 +218,19 @@
                 "spacer_xaRR4e"
               ]
             },
-            "variant_picker": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": true,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "group_kNeUtN": {
               "type": "group",
-              "name": "Guide des tailles",
+              "name": "Tailles et guide",
               "settings": {
                 "link": "",
                 "open_in_new_tab": false,
-                "content_direction": "row",
+                "content_direction": "column",
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-end",
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
                 "gap": 0,
                 "width": "fill",
                 "custom_width": 100,
@@ -273,10 +260,24 @@
                 "mp_size_chart_size_guide_mp_inline_button_HyEY3g": {
                   "type": "shopify://apps/mp-size-chart-size-guide/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
                   "settings": {}
+                },
+                "variant_picker": {
+                  "type": "variant-picker",
+                  "settings": {
+                    "variant_style": "buttons",
+                    "show_swatches": true,
+                    "alignment": "left",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "mp_size_chart_size_guide_mp_inline_button_HyEY3g"
+                "mp_size_chart_size_guide_mp_inline_button_HyEY3g",
+                "variant_picker"
               ]
             },
             "buy_buttons": {
@@ -558,7 +559,6 @@
           "block_order": [
             "group",
             "group_kNeUtN",
-            "variant_picker",
             "buy_buttons",
             "group_EekJGx",
             "accordion_B4yFm8"

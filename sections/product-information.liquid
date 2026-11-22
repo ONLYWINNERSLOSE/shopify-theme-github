@@ -490,6 +490,30 @@
     text-decoration-thickness: 1px;
   }
 
+
+  /* Keep the existing size-guide app alongside the native size legend. */
+  .product-information .group-block-content:has(> .mp-inline-button):has(> variant-picker .variant-option--size-stock) {
+    position: relative;
+    width: 100%;
+  }
+
+  .product-information .group-block-content:has(> variant-picker .variant-option--size-stock) > .mp-inline-button {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    z-index: 2;
+    width: max-content;
+    max-width: 70%;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .product-information .group-block-content:has(> .mp-inline-button) .variant-option--size-stock > legend {
+    box-sizing: border-box;
+    width: 100%;
+    padding-inline-end: 150px;
+    min-height: 20px;
+  }
 {% endstylesheet %}
 
 {% schema %}
