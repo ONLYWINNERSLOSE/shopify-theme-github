@@ -442,7 +442,7 @@
   }
 
   .product-information .variant-option__stock {
-    display: inline-flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 4px;
@@ -472,6 +472,24 @@
   .product-information .variant-option--size-stock .variant-option__button-label:has([data-option-available='false']) .variant-option__button-label__text {
     text-decoration: line-through;
   }
+
+  .product-information .variant-option--size-stock .variant-option__button-label:has(:checked) .variant-option__stock {
+    display: inline-flex;
+  }
+
+  /* Sold-out sizes retain contrast against the unselected dark cell. */
+  .product-information .variant-option--size-stock .variant-option__button-label:has([data-option-available='false']):not(:has(:checked)) {
+    color: rgb(var(--color-foreground-rgb) / 0.7);
+  }
+
+  .product-information .variant-option--size-stock .variant-option__button-label:has([data-option-available='false']) .variant-option__button-label__text {
+    display: block;
+    color: inherit;
+    opacity: 1;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
 {% endstylesheet %}
 
 {% schema %}
