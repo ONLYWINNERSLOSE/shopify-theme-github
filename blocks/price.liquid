@@ -92,10 +92,13 @@
 {% stylesheet %}
   .product-price-detail .price,
   .product-price-detail .compare-at-price {
-    font-size: 1.25em;
+    font-size: 1em;
+    line-height: 1;
   }
 
   .product-price-detail__row {
+    font-size: 1.25em;
+    line-height: 1;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -109,10 +112,15 @@
   }
 
   .product-price-detail__badge {
-    display: inline-block;
-    font-size: max(0.625rem, 0.85em);
-    line-height: 1.4;
-    padding: 0.4em 0.65em;
+    /* 0.55 × 1.81818 = one price line, with proportional text. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 0.55em;
+    line-height: 1;
+    height: 1.81818em;
+    padding: 0 0.65em;
     background: linear-gradient(110deg, #ff0000, #cb1717);
     color: #fff;
     font-family: 'Marcellus', Georgia, serif;
