@@ -17,7 +17,7 @@
           "static": true,
           "settings": {
             "media_presentation": "grid",
-            "media_columns": "one",
+            "media_columns": "two",
             "image_gap": 0,
             "large_first_image": false,
             "icons_style": "arrow",
@@ -258,7 +258,7 @@
               },
               "blocks": {
                 "mp_size_chart_size_guide_mp_inline_button_HyEY3g": {
-                  "type": "shopify://apps/mp-size-chart-size-guide/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
+                  "type": "shopify://apps/mp-size-chart/blocks/mp-inline-button/305100b1-3599-492a-a54d-54f196ff1f94",
                   "settings": {}
                 },
                 "variant_picker": {
